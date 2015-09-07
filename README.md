@@ -1,8 +1,8 @@
 MMPopupView
 =============
-[![Total views](https://sourcegraph.com/api/repos/github.com/adad184/MMPopupView/.counters/views.png)](https://sourcegraph.com/github.com/adad184/MMPopupView)
-[![Views in the last 24 hours](https://sourcegraph.com/api/repos/github.com/adad184/MMPopupView/.counters/views-24h.png)](https://sourcegraph.com/github.com/adad184/MMPopupView)
-[![Cocoapods](https://cocoapod-badges.herokuapp.com/v/MMPopupView/badge.png)](http://cocoapods.org/?q=MMPopupView)
+[![CocoaPods](https://img.shields.io/cocoapods/v/MMPopupView.svg)]()
+[![CocoaPods](https://img.shields.io/cocoapods/p/MMPopupView.svg)]()
+[![CocoaPods](https://img.shields.io/cocoapods/l/MMPopupView.svg)]()
 
 A basic Pop-Up Kit allows you to easily create Pop-Up view. You can focus on the only view you want to show. 
 
