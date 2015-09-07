@@ -6,7 +6,7 @@ MMPopupView
 
 A basic Pop-Up Kit allows you to easily create Pop-Up view. You can focus on the only view you want to show. 
 
-Besides, it comes with 2 common Pop-Up view, **AlertView* &  **SheetView**. You can easily use & customize it.
+Besides, it comes with 2 common Pop-Up view, **MMAlertView** &  **MMSheetView**. You can easily use & customize it.
 
 ![demo](https://github.com/adad184/MMPopupView/blob/master/Images/0.jpg)
 
@@ -81,7 +81,7 @@ typedef void(^MMPopupInputHandler)(NSString *text);
 
 **MMAlertViewConfig** is the global configuration of **MMAlertView**, you can fully customize by adjust it.
 
-```obcj
+```objc
 @interface MMAlertViewConfig : NSObject
 
 + (MMAlertViewConfig*) globalConfig;
