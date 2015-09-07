@@ -92,7 +92,7 @@
               MMItemMake(@"Save", MMItemTypeHighlight, block),
               MMItemMake(@"Cancel", MMItemTypeNormal, block)];
             
-            [[[MMAlertView alloc] initWithTitle:@"AlertView" detail:@"each button take one row if items count more than 2" items:items] showWithBlock:completeBlock];
+            [[[MMAlertView alloc] initWithTitle:@"AlertView" detail:@"each button take one row if there are more than 2 items" items:items] showWithBlock:completeBlock];
             break;
         }
         case 1:
