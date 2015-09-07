@@ -1,0 +1,10 @@
+PODS:
+  - Masonry (0.6.2)
+
+DEPENDENCIES:
+  - Masonry
+
+SPEC CHECKSUMS:
+  Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
+
+COCOAPODS: 0.38.2
