@@ -4,13 +4,11 @@ MMPopupView
 [![Views in the last 24 hours](https://sourcegraph.com/api/repos/github.com/adad184/MMPopupView/.counters/views-24h.png)](https://sourcegraph.com/github.com/adad184/MMPopupView)
 [![Cocoapods](https://cocoapod-badges.herokuapp.com/v/MMPopupView/badge.png)](http://cocoapods.org/?q=MMPopupView)
 
-A subclass of UITableViewCell to present the parallax effect. MMParallaxCell is a drop-in solution, basically you don't need to configure anything, but also you can customize it youself. 
+A basic Pop-Up Kit allows you to easily create Pop-Up view. You can focus on the only view you want to show. 
 
-Besides, you don't have to add additional codes in UITableView's Delegate Method, use it as natural as UITableViewCell :)
+Besides, it comes with 2 common Pop-Up view, **AlertView* &  **SheetView**. You can easily use & customize it.
 
-Parallax effect in demo project
-
-![demo](https://github.com/adad184/MMParallaxCell/blob/master/DEMO.gif)
+![demo](https://github.com/adad184/MMPopupView/blob/master/Images/0.gif)
 
 
 Installation
@@ -19,55 +17,51 @@ Installation
 The preferred way of installation is via [CocoaPods](http://cocoapods.org). Just add
 
 ```ruby
-pod 'MMParallaxCell'
+pod 'MMPopupView'
 ```
 
-and run `pod install`. It will install the most recent version of MMParallaxCell.
+and run `pod install`. It will install the most recent version of MMPopupView.
 
-If you would like to use the latest code of MMParallaxCell use:
+If you would like to use the latest code of MMPopupView use:
 
 ```ruby
-pod 'MMParallaxCell', :head
+pod 'MMPopupView', :head
 ```
 
 Usage
 ===============
 
-simply, you only need to set the image you wanna display.
+If you want to create your own Pop-Up view,simply you only need to subclass from **MMPopupView**.
 
 ```objc
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString* cellIdentifier = @"CellIdentifier";
-    MMParallaxCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[MMParallaxCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    
-    [cell.parallaxImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://lorempixel.com/400/400/technics/%ld/",indexPath.row]]];
-    
-    return cell;
-}
+@interface YourCustomView : MMPopupView
+
+@end
 
 ```
 
-
-and you can change the ratio of the parallax effect.
+after you customize it, you can simply use it.
 
 ```objc
 
-@property (nonatomic, assign) CGFloat parallaxRatio; //ratio of cell height, should between [1.0f, 2.0f], default is 1.5f;
+
+[YourCustomView show];
+[YourCustomView showWithBlock:completionBlock];
+
+[YourCustomView hide];
+[YourCustomView hideWithBlock:completionBlock];
 
 ```
+
+===============
+
+
+
 	
 
 Changelog
 ===============
-
-v1.2  now it's more safer when using KVO in code (thx @keyboardsamurai) and you can used for custom nibs (thx @kirualex)
-
-v1.1  fixed crash caused by "removeObserver"
 
 v1.0  you can custom or simply use it by
 
