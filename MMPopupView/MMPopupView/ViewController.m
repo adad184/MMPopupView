@@ -32,6 +32,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     self.btnAlert   = [UIButton buttonWithType:UIButtonTypeCustom];
     self.btnConfirm = [UIButton buttonWithType:UIButtonTypeCustom];
     self.btnInput   = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -60,49 +63,58 @@
     
     [[MMPopupWindow sharedWindow] cacheWindow];
     [MMPopupWindow sharedWindow].touchWildToHide = YES;
+    
+    MMAlertViewConfig *alertConfig = [MMAlertViewConfig globalConfig];
+    MMSheetViewConfig *sheetConfig = [MMSheetViewConfig globalConfig];
+    
+    alertConfig.defaultTextOK = @"OK";
+    alertConfig.defaultTextCancel = @"Cancel";
+    alertConfig.defaultTextConfirm = @"Confirm";
+    
+    sheetConfig.defaultTextCancel = @"Cancel";
 }
 
 - (void)actionButton:(UIButton*)btn
 {
     MMPopupItemHandler block = ^(NSInteger index){
-        NSLog(@"你按了第%@个按钮",@(index));
+        NSLog(@"clickd %@ button",@(index));
     };
     
     MMPopupBlock completeBlock = ^(MMPopupView *popupView){
-        NSLog(@"动画结束");
+        NSLog(@"animation complete");
     };
     
     switch ( btn.tag) {
         case 0:
         {
             NSArray *items =
-            @[MMItemMake(@"保存", MMItemTypeHighlight, block),
-              MMItemMake(@"确定", MMItemTypeHighlight, block),
-              MMItemMake(@"取消", MMItemTypeNormal, block)];
+            @[MMItemMake(@"Done", MMItemTypeNormal, block),
+              MMItemMake(@"Save", MMItemTypeHighlight, block),
+              MMItemMake(@"Cancel", MMItemTypeNormal, block)];
             
-            [[[MMAlertView alloc] initWithTitle:@"测试" detail:@"自定义事件" items:items] showWithBlock:completeBlock];
+            [[[MMAlertView alloc] initWithTitle:@"AlertView" detail:@"each button take one row if items count more than 2" items:items] showWithBlock:completeBlock];
             break;
         }
         case 1:
         {
-            [[[MMAlertView alloc] initWithConfirmTitle:@"测试" detail:@"确认框"] showWithBlock:completeBlock];
+            [[[MMAlertView alloc] initWithConfirmTitle:@"AlertView" detail:@"Confirm Dialog"] showWithBlock:completeBlock];
             break;
         }
         case 2:
         {
-            [[[MMAlertView alloc] initWithInputTitle:@"测试" detail:@"输入框" placeholder:@"输入您的用户名" handler:^(NSString *text) {
-                NSLog(@"你输入的是:%@",text);
+            [[[MMAlertView alloc] initWithInputTitle:@"AlertView" detail:@"Input Dialog" placeholder:@"Your placeholder" handler:^(NSString *text) {
+                NSLog(@"input:%@",text);
             }] showWithBlock:completeBlock];
             break;
         }
         case 3:
         {
             NSArray *items =
-            @[MMItemMake(@"取消", MMItemTypeNormal, block),
-              MMItemMake(@"保存", MMItemTypeHighlight, block),
-              MMItemMake(@"退出", MMItemTypeDisabled, block)];
+            @[MMItemMake(@"Normal", MMItemTypeNormal, block),
+              MMItemMake(@"Highlight", MMItemTypeHighlight, block),
+              MMItemMake(@"Disabled", MMItemTypeDisabled, block)];
             
-            [[[MMSheetView alloc] initWithTitle:@"测试"
+            [[[MMSheetView alloc] initWithTitle:@"SheetView"
                                           items:items] showWithBlock:completeBlock];
             break;
         }
@@ -126,6 +138,12 @@
         default:
             break;
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
 }
 
 - (void)didReceiveMemoryWarning {

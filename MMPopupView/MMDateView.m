@@ -7,6 +7,7 @@
 //
 
 #import "MMDateView.h"
+#import "MMPopupDefine.h"
 #import "MMPopupCategory.h"
 #import <Masonry/Masonry.h>
 
@@ -43,8 +44,8 @@
             make.size.mas_equalTo(CGSizeMake(80, 50));
             make.left.top.equalTo(self);
         }];
-        [self.btnCancel setTitle:@"取消" forState:UIControlStateNormal];
-        [self.btnCancel setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [self.btnCancel setTitle:@"Cancel" forState:UIControlStateNormal];
+        [self.btnCancel setTitleColor:MMHexColor(0xE76153FF) forState:UIControlStateNormal];
         
         
         self.btnConfirm = [UIButton mm_buttonWithTarget:self action:@selector(actionHide)];
@@ -53,8 +54,8 @@
             make.size.mas_equalTo(CGSizeMake(80, 50));
             make.right.top.equalTo(self);
         }];
-        [self.btnConfirm setTitle:@"确定" forState:UIControlStateNormal];
-        [self.btnConfirm setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [self.btnConfirm setTitle:@"Confirm" forState:UIControlStateNormal];
+        [self.btnConfirm setTitleColor:MMHexColor(0xE76153FF) forState:UIControlStateNormal];
         
         self.datePicker = [UIDatePicker new];
         [self addSubview:self.datePicker];

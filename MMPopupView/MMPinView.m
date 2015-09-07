@@ -68,7 +68,7 @@
             make.top.right.equalTo(self.backView).insets(UIEdgeInsetsMake(0, 0, 0, 5));
             make.size.mas_equalTo(CGSizeMake(40, 40));
         }];
-        [self.btnClose setTitle:@"关闭" forState:UIControlStateNormal];
+        [self.btnClose setTitle:@"Close" forState:UIControlStateNormal];
         [self.btnClose setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         self.btnClose.titleLabel.font = [UIFont systemFontOfSize:14];
         
@@ -80,7 +80,7 @@
         }];
         self.lblStatus.textColor = MMHexColor(0x3333333FF);
         self.lblStatus.font = [UIFont boldSystemFontOfSize:17];
-        self.lblStatus.text = @"请输入验证码";
+        self.lblStatus.text = @"You Pin Code";
         self.lblStatus.textAlignment = NSTextAlignmentCenter;
         
         
@@ -104,7 +104,7 @@
         self.lblPhone.textColor = MMHexColor(0x999999FF);
         [self.lblPhone setContentCompressionResistancePriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisVertical];
         [self.lblPhone setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
-        self.lblPhone.text = @"短信验证码已发送至\n186 8877 8877";
+        self.lblPhone.text = @"The Code was sent to\n186 8877 8877";
         
         self.btnCountDown = [UIButton mm_buttonWithTarget:self action:@selector(actionResend)];
         [self.backView addSubview:self.btnCountDown];
@@ -179,11 +179,11 @@
     if ( self.nCountdown == 0 )
     {
         self.btnCountDown.enabled = YES;
-        [self.btnCountDown setTitle:@"重新发送" forState:UIControlStateNormal];
+        [self.btnCountDown setTitle:@"Resent" forState:UIControlStateNormal];
     }
     else
     {
-        NSString *text = [NSString stringWithFormat:@"接收短信大约需要%@秒", [@(self.nCountdown) stringValue]];
+        NSString *text = [NSString stringWithFormat:@"Receive in %@ secs", [@(self.nCountdown) stringValue]];
         
         [self.btnCountDown setTitle:text forState:UIControlStateDisabled];
         
