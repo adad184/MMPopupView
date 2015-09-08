@@ -27,8 +27,8 @@ typedef void(^MMPopupBlock)(MMPopupView *);
 @property (nonatomic, copy  ) MMPopupBlock   showCompletionBlock;   // show completion block.
 @property (nonatomic, copy  ) MMPopupBlock   hideCompletionBlock;   // hide completion block
 
-@property (nonatomic, copy  ) MMPopupBlock   showAnimation;         // custom show animation block (only effect with MMPopupTypeCustom).
-@property (nonatomic, copy  ) MMPopupBlock   hideAnimation;         // custom hide animation block (only effect with MMPopupTypeCustom).
+@property (nonatomic, copy  ) MMPopupBlock   showAnimation;         // custom show animation block.
+@property (nonatomic, copy  ) MMPopupBlock   hideAnimation;         // custom hide animation block.
 
 /**
  *  override this method to show the keyboard if with a keyboard

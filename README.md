@@ -32,6 +32,30 @@ If you would like to use the latest code of MMPopupView use:
 pod 'MMPopupView', :head
 ```
 
+Usage
+===============
+```objc
+//MMAlertView
+NSArray *items =
+@[MMItemMake(@"Done", MMItemTypeNormal, block),
+  MMItemMake(@"Save", MMItemTypeHighlight, block),
+  MMItemMake(@"Cancel", MMItemTypeNormal, block)];
+
+[[[MMAlertView alloc] initWithTitle:@"AlertView"
+                             detail:@"each button take one row if there are more than 2 items"
+                              items:items]
+ showWithBlock:completeBlock];
+             
+//MMSheetView
+NSArray *items =
+@[MMItemMake(@"Normal", MMItemTypeNormal, block),
+  MMItemMake(@"Highlight", MMItemTypeHighlight, block),
+  MMItemMake(@"Disabled", MMItemTypeDisabled, block)];
+
+[[[MMSheetView alloc] initWithTitle:@"SheetView"
+              items:items] showWithBlock:completeBlock];
+```
+
 MMPopupView
 ===============
 

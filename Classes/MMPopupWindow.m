@@ -31,8 +31,6 @@
     
     if ( self )
     {
-        id<UIApplicationDelegate> delegate = [UIApplication sharedApplication].delegate;
-        self.mainWindow = delegate.window;
         self.windowLevel = UIWindowLevelStatusBar + 1;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyKeyboardChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -66,6 +64,7 @@
     
     self.hidden = NO;
     self.backgroundAnimating = YES;
+    self.mainWindow = [UIApplication sharedApplication].keyWindow;
     [self makeKeyAndVisible];
     
     [UIView animateWithDuration:0.3
@@ -116,8 +115,8 @@
 
 - (void)cacheWindow
 {
+    self.mainWindow = [UIApplication sharedApplication].keyWindow;
     [self makeKeyAndVisible];
-    
     [self.mainWindow makeKeyWindow];
     
     self.hidden = YES;
