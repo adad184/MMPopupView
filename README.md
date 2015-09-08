@@ -4,6 +4,8 @@ MMPopupView
 [![CocoaPods](https://img.shields.io/cocoapods/p/MMPopupView.svg)]()
 [![CocoaPods](https://img.shields.io/cocoapods/l/MMPopupView.svg)]()
 
+[中文介绍](http://adad184.com/2015/09/08/opensource-mmpopupview/)
+
 A basic Pop-Up Kit allows you to easily create Pop-Up view. You can focus on the only view you want to show. 
 
 Besides, it comes with 2 common Pop-Up view, **MMAlertView** &  **MMSheetView**. You can easily use & customize it.
