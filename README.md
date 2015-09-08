@@ -36,7 +36,7 @@ MMPopupView
 ===============
 
 MMPopupView is a basic Pop-Up view designed to be subclassed. 
-It provide 3 kind of animations(alert, sheet, drop), or you can provide your own animation.
+It provide 3 kind of animations(alert, sheet, drop), or you can provide your own animation by override the **showAnimation** and **hideAnimation**.
 
 ```objc
 typedef NS_ENUM(NSUInteger, MMPopupType) {
