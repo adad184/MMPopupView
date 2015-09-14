@@ -196,7 +196,7 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
                         options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          
-//                         self.mm_dimBackgroundView.backgroundColor = MMHexColor(0x0000007F);
+                         self.mm_dimBackgroundView.backgroundColor = MMHexColor(0x0000007F);
                          
                      } completion:^(BOOL finished) {
                          
