@@ -77,6 +77,8 @@ typedef void(^MMPopupBlock)(MMPopupView *);
 
 @interface MMPopupView : UIView
 
+@property (nonatomic, strong) UIView         *attachedView;         // default is MMPopupWindow. You can attach MMPopupView to any UIView.
+
 @property (nonatomic, assign) MMPopupType    type;                  // default is MMPopupTypeAlert.
 @property (nonatomic, assign) NSTimeInterval animationDuration;     // default is 0.3 sec.
 @property (nonatomic, assign) BOOL           withKeyboard;          // default is NO. When YES, alert view with be shown with a center offset (only effect with MMPopupTypeAlert).
@@ -249,5 +251,11 @@ MMSheetView
 
 Changelog
 ===============
+
+v1.1  Now you can attached MMPopupView to any UIView you want by using:
+
+```objc
+@property (nonatomic, strong) UIView         *attachedView; // default is MMPopupWindow. You can attach MMPopupView to any UIView.         
+```
 
 v1.0  first version
