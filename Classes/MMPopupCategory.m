@@ -7,7 +7,9 @@
 //
 
 #import "MMPopupCategory.h"
+#import "MMPopupDefine.h"
 #import <Masonry/Masonry.h>
+#import <objc/runtime.h>
 
 @implementation UIColor (MMPopup)
 
@@ -90,7 +92,154 @@
 
 @end
 
+
+static const void *mm_dimReferenceCountKey      = &mm_dimReferenceCountKey;
+
+static const void *mm_dimBackgroundViewKey      = &mm_dimBackgroundViewKey;
+static const void *mm_dimAnimationDurationKey   = &mm_dimAnimationDurationKey;
+static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
+
+@interface UIView (MMPopupInner)
+
+@property (nonatomic, assign, readwrite) NSInteger mm_dimReferenceCount;
+
+@end
+
+@implementation UIView (MMPopupInner)
+
+@dynamic mm_dimReferenceCount;
+
+
+- (NSInteger)mm_dimReferenceCount {
+    return [objc_getAssociatedObject(self, mm_dimReferenceCountKey) integerValue];
+}
+
+- (void)setMm_dimReferenceCount:(NSInteger)mm_dimReferenceCount
+{
+    objc_setAssociatedObject(self, mm_dimReferenceCountKey, @(mm_dimReferenceCount), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+@end
+
+
 @implementation UIView (MMPopup)
+
+@dynamic mm_dimBackgroundView;
+@dynamic mm_dimAnimationDuration;
+@dynamic mm_dimBackgroundAnimating;
+
+- (UIView *)mm_dimBackgroundView
+{
+    UIView *dimView = objc_getAssociatedObject(self, mm_dimBackgroundViewKey);
+    
+    if ( !dimView )
+    {
+        dimView = [UIView new];
+        [self addSubview:dimView];
+        [dimView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self);
+        }];
+        dimView.hidden = YES;
+        
+        self.mm_dimAnimationDuration = 0.3f;
+        
+        objc_setAssociatedObject(self, mm_dimBackgroundViewKey, dimView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    
+    return dimView;
+}
+
+- (BOOL)mm_dimBackgroundAnimating
+{
+    return [objc_getAssociatedObject(self, mm_dimBackgroundAnimatingKey) boolValue];
+}
+
+- (void)setMm_dimBackgroundAnimating:(BOOL)mm_dimBackgroundAnimating
+{
+    objc_setAssociatedObject(self, mm_dimBackgroundAnimatingKey, @(mm_dimBackgroundAnimating), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSTimeInterval)mm_dimAnimationDuration
+{
+    return [objc_getAssociatedObject(self, mm_dimAnimationDurationKey) doubleValue];
+}
+
+- (void)setMm_dimAnimationDuration:(NSTimeInterval)mm_dimAnimationDuration
+{
+    objc_setAssociatedObject(self, mm_dimAnimationDurationKey, @(mm_dimAnimationDuration), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)mm_showDimBackground
+{
+    ++self.mm_dimReferenceCount;
+    
+    if ( self.mm_dimReferenceCount > 1 )
+    {
+        return;
+    }
+    
+    self.mm_dimBackgroundView.hidden = NO;
+    self.mm_dimBackgroundAnimating = YES;
+    
+    if ( [self isKindOfClass:[UIWindow class]] )
+    {
+        self.hidden = NO;
+        [(UIWindow*)self makeKeyAndVisible];
+    }
+    else
+    {
+        [self bringSubviewToFront:self.mm_dimBackgroundView];
+    }
+    
+    [UIView animateWithDuration:self.mm_dimAnimationDuration
+                          delay:0
+                        options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         
+//                         self.mm_dimBackgroundView.backgroundColor = MMHexColor(0x0000007F);
+                         
+                     } completion:^(BOOL finished) {
+                         
+                         if ( finished )
+                         {
+                             self.mm_dimBackgroundAnimating = NO;
+                         }
+                         
+                     }];
+}
+
+- (void)mm_hideDimBackground
+{
+    --self.mm_dimReferenceCount;
+    
+    if ( self.mm_dimReferenceCount > 0 )
+    {
+        return;
+    }
+    
+    self.mm_dimBackgroundAnimating = YES;
+    [UIView animateWithDuration:self.mm_dimAnimationDuration
+                          delay:0
+                        options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         
+                         self.mm_dimBackgroundView.backgroundColor = MMHexColor(0x00000000);
+                         
+                     } completion:^(BOOL finished) {
+                         
+                         if ( finished )
+                         {
+                             self.mm_dimBackgroundView.hidden = YES;
+                             self.mm_dimBackgroundAnimating = NO;
+                             
+                             if ( [self isKindOfClass:[UIWindow class]] )
+                             {
+                                 self.hidden = YES;
+                                 [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
+                             }
+                         }
+                     }];
+}
 
 - (void) mm_distributeSpacingHorizontallyWith:(NSArray*)views
 {
@@ -187,3 +336,4 @@
 }
 
 @end
+

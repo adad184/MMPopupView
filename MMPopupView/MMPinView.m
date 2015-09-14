@@ -78,11 +78,10 @@
             make.left.top.right.equalTo(self.backView).insets(UIEdgeInsetsMake(0, 19, 0, 19));
             make.height.equalTo(@50);
         }];
-        self.lblStatus.textColor = MMHexColor(0x3333333FF);
+        self.lblStatus.textColor = MMHexColor(0x333333FF);
         self.lblStatus.font = [UIFont boldSystemFontOfSize:17];
         self.lblStatus.text = @"You Pin Code";
         self.lblStatus.textAlignment = NSTextAlignmentCenter;
-        
         
         UIView *split = [UIView new];
         [self.backView addSubview:split];

@@ -83,6 +83,8 @@
         self.layer.cornerRadius = config.cornerRadius;
         self.clipsToBounds = YES;
         self.backgroundColor = config.backgroundColor;
+        self.layer.borderWidth = MM_SPLIT_WIDTH;
+        self.layer.borderColor = config.splitColor.CGColor;
         
         [self mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(config.width);

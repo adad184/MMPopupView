@@ -19,15 +19,4 @@
  */
 - (void) cacheWindow;
 
-/**
- *  show the translucent background
- */
-- (void) showDimBackground;
-
-
-/**
- *  hide the translucent background
- */
-- (void) hideDimBackground;
-
 @end

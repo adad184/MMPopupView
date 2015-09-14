@@ -9,6 +9,7 @@
 #import "MMPopupView.h"
 #import "MMPopupWindow.h"
 #import "MMPopupDefine.h"
+#import "MMPopupCategory.h"
 #import <Masonry/Masonry.h>
 
 @implementation MMPopupView
@@ -73,6 +74,12 @@
     }
 }
 
+- (void)setAnimationDuration:(NSTimeInterval)animationDuration
+{
+    _animationDuration = animationDuration;
+    
+    self.attachedView.mm_dimAnimationDuration = animationDuration;
+}
 
 - (void)show
 {
@@ -86,8 +93,11 @@
         self.showCompletionBlock = block;
     }
     
-    MMPopupWindow *window = [MMPopupWindow sharedWindow];
-    [window showDimBackground];
+    if ( !self.attachedView )
+    {
+        self.attachedView = [MMPopupWindow sharedWindow];
+    }
+    [self.attachedView mm_showDimBackground];
     
     NSAssert(self.showAnimation, @"show animation must be there");
     
@@ -111,8 +121,11 @@
         self.hideCompletionBlock = block;
     }
     
-    MMPopupWindow *window = [MMPopupWindow sharedWindow];
-    [window hideDimBackground];
+    if ( !self.attachedView )
+    {
+        self.attachedView = [MMPopupWindow sharedWindow];
+    }
+    [self.attachedView mm_hideDimBackground];
     
     if ( self.withKeyboard )
     {
@@ -129,11 +142,10 @@
     MMWeakify(self);
     MMPopupBlock block = ^(MMPopupView *popupView){
         MMStrongify(self);
-                
-        MMPopupWindow *window = [MMPopupWindow sharedWindow];
-        [window addSubview:self];
+        
+        [self.attachedView.mm_dimBackgroundView addSubview:self];
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(window).centerOffset(CGPointMake(0, self.withKeyboard?-216/2:0));
+            make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, self.withKeyboard?-216/2:0));
         }];
         [self layoutIfNeeded];
         
@@ -197,12 +209,11 @@
     MMPopupBlock block = ^(MMPopupView *popupView){
         MMStrongify(self);
         
-        MMPopupWindow *window = [MMPopupWindow sharedWindow];
-        [window addSubview:self];
+        [self.attachedView.mm_dimBackgroundView addSubview:self];
         
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(window);
-            make.bottom.equalTo(window.mas_bottom).offset(window.frame.size.height);
+            make.centerX.equalTo(self.attachedView);
+            make.bottom.equalTo(self.attachedView.mas_bottom).offset(self.attachedView.frame.size.height);
         }];
         [self layoutIfNeeded];
         
@@ -212,7 +223,7 @@
                          animations:^{
                              
                              [self mas_updateConstraints:^(MASConstraintMaker *make) {
-                                 make.bottom.equalTo(window.mas_bottom).offset(0);
+                                 make.bottom.equalTo(self.attachedView.mas_bottom).offset(0);
                              }];
                              
                              [self layoutIfNeeded];
@@ -237,15 +248,13 @@
     MMPopupBlock block = ^(MMPopupView *popupView){
         MMStrongify(self);
         
-        MMPopupWindow *window = [MMPopupWindow sharedWindow];
-        
         [UIView animateWithDuration:self.animationDuration
                               delay:0
                             options:UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
                              
                              [self mas_updateConstraints:^(MASConstraintMaker *make) {
-                                 make.bottom.equalTo(window.mas_bottom).offset(window.frame.size.height);
+                                 make.bottom.equalTo(self.attachedView.mas_bottom).offset(self.attachedView.frame.size.height);
                              }];
                              
                              [self layoutIfNeeded];
@@ -272,10 +281,9 @@
     MMPopupBlock block = ^(MMPopupView *popupView){
         MMStrongify(self);
         
-        MMPopupWindow *window = [MMPopupWindow sharedWindow];
-        [window addSubview:self];
+        [self.attachedView addSubview:self];
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(window).centerOffset(CGPointMake(0, -window.bounds.size.height));
+            make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, -self.attachedView.bounds.size.height));
         }];
         [self layoutIfNeeded];
         
@@ -287,7 +295,7 @@
                          animations:^{
                              
                              [self mas_updateConstraints:^(MASConstraintMaker *make) {
-                                 make.center.equalTo(window).centerOffset(CGPointMake(0, self.withKeyboard?-216/2:0));
+                                 make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, self.withKeyboard?-216/2:0));
                              }];
                              
                              [self layoutIfNeeded];
@@ -311,14 +319,13 @@
     MMPopupBlock block = ^(MMPopupView *popupView){
         MMStrongify(self);
         
-        MMPopupWindow *window = [MMPopupWindow sharedWindow];
         [UIView animateWithDuration:0.3
                               delay:0
                             options:UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
                              
                              [self mas_updateConstraints:^(MASConstraintMaker *make) {
-                                 make.center.equalTo(window).centerOffset(CGPointMake(0, window.bounds.size.height));
+                                 make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, self.attachedView.bounds.size.height));
                              }];
                              
                              [self layoutIfNeeded];
