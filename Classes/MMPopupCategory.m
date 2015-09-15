@@ -235,7 +235,7 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
                              if ( [self isKindOfClass:[UIWindow class]] )
                              {
                                  self.hidden = YES;
-                                 [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
+                                 [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
                              }
                          }
                      }];

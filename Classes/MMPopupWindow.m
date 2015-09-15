@@ -49,7 +49,7 @@
 - (void)cacheWindow
 {
     [self makeKeyAndVisible];
-    [[UIApplication sharedApplication].keyWindow makeKeyWindow];
+    [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
     
     self.hidden = YES;
 }
