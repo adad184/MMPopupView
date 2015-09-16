@@ -59,12 +59,10 @@
 
 - (void)actionTap:(UITapGestureRecognizer*)gesture
 {
-    NSLog(@"11");
     if ( self.touchWildToHide && !self.mm_dimBackgroundAnimating )
     {
         for ( UIView *v in self.mm_dimBackgroundView.subviews )
         {
-            NSLog(@"%@",v);
             if ( [v isKindOfClass:[MMPopupView class]] )
             {
                 MMPopupView *popupView = (MMPopupView*)v;
