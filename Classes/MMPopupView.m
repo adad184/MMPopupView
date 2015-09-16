@@ -44,6 +44,16 @@
     self.animationDuration = 0.3f;
 }
 
+- (BOOL)visible
+{
+    if ( self.attachedView )
+    {
+        return !self.attachedView.mm_dimBackgroundView.hidden;
+    }
+    
+    return NO;
+}
+
 - (void)setType:(MMPopupType)type
 {
     _type = type;

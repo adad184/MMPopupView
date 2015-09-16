@@ -44,22 +44,23 @@
 
     NSArray *arrayButton = @[self.btnAlert, self.btnConfirm, self.btnInput, self.btnSheet, self.btnPin, self.btnDate];
     NSArray *arrayTitle  = @[@"Alert - Default", @"Alert - Confirm", @"Alert - Input", @"Sheet - Default", @"Custom - PinView", @"Custom - DateView"];
-    [arrayButton enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        UIButton *btn = (UIButton*)obj;
+    
+    for ( int i = 0 ; i < arrayButton.count; ++i )
+    {
+        UIButton *btn = arrayButton[i];
         [self.view addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.view);
-            make.top.equalTo(self.view.mas_top).offset(100 + idx*60);
+            make.top.equalTo(self.view.mas_top).offset(100 + i*60);
             make.size.mas_equalTo(CGSizeMake(180, 40));
         }];
         
-        [btn setTitle:arrayTitle[idx] forState:UIControlStateNormal];
+        [btn setTitle:arrayTitle[i] forState:UIControlStateNormal];
         [btn setBackgroundColor:[UIColor blackColor]];
         [btn addTarget:self action:@selector(actionButton:) forControlEvents:UIControlEventTouchUpInside];
         btn.titleLabel.textAlignment = NSTextAlignmentLeft;
-        btn.tag = idx;
-    }];
+        btn.tag = i;
+    }
     
     [[MMPopupWindow sharedWindow] cacheWindow];
     [MMPopupWindow sharedWindow].touchWildToHide = YES;

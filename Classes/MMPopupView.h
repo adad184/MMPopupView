@@ -20,17 +20,19 @@ typedef void(^MMPopupBlock)(MMPopupView *);
 
 @interface MMPopupView : UIView
 
-@property (nonatomic, strong) UIView         *attachedView;         // default is MMPopupWindow. You can attach MMPopupView to any UIView.
+@property (nonatomic, assign, readonly) BOOL           visible;             // default is NO.
 
-@property (nonatomic, assign) MMPopupType    type;                  // default is MMPopupTypeAlert.
-@property (nonatomic, assign) NSTimeInterval animationDuration;     // default is 0.3 sec.
-@property (nonatomic, assign) BOOL           withKeyboard;          // default is NO. When YES, alert view with be shown with a center offset (only effect with MMPopupTypeAlert).
+@property (nonatomic, strong          ) UIView         *attachedView;       // default is MMPopupWindow. You can attach MMPopupView to any UIView.
 
-@property (nonatomic, copy  ) MMPopupBlock   showCompletionBlock;   // show completion block.
-@property (nonatomic, copy  ) MMPopupBlock   hideCompletionBlock;   // hide completion block
+@property (nonatomic, assign          ) MMPopupType    type;                // default is MMPopupTypeAlert.
+@property (nonatomic, assign          ) NSTimeInterval animationDuration;   // default is 0.3 sec.
+@property (nonatomic, assign          ) BOOL           withKeyboard;        // default is NO. When YES, alert view with be shown with a center offset (only effect with MMPopupTypeAlert).
 
-@property (nonatomic, copy  ) MMPopupBlock   showAnimation;         // custom show animation block.
-@property (nonatomic, copy  ) MMPopupBlock   hideAnimation;         // custom hide animation block.
+@property (nonatomic, copy            ) MMPopupBlock   showCompletionBlock; // show completion block.
+@property (nonatomic, copy            ) MMPopupBlock   hideCompletionBlock; // hide completion block
+
+@property (nonatomic, copy            ) MMPopupBlock   showAnimation;       // custom show animation block.
+@property (nonatomic, copy            ) MMPopupBlock   hideAnimation;       // custom hide animation block.
 
 /**
  *  override this method to show the keyboard if with a keyboard
