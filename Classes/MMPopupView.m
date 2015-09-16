@@ -291,7 +291,7 @@
     MMPopupBlock block = ^(MMPopupView *popupView){
         MMStrongify(self);
         
-        [self.attachedView addSubview:self];
+        [self.attachedView.mm_dimBackgroundView addSubview:self];
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, -self.attachedView.bounds.size.height));
         }];
