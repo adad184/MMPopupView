@@ -28,6 +28,9 @@
         self.windowLevel = UIWindowLevelStatusBar + 1;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyKeyboardChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+        
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTap:)];
+        [self addGestureRecognizer:gesture];
     }
     return self;
 }
@@ -54,26 +57,19 @@
     self.hidden = YES;
 }
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+- (void)actionTap:(UITapGestureRecognizer*)gesture
 {
-    UIView *view = [super hitTest:point withEvent:event];
-    
-    if ( (view == self) && self.touchWildToHide && !self.mm_dimBackgroundAnimating )
+    if ( self.touchWildToHide && !self.mm_dimBackgroundAnimating )
     {
-        if ( !CGRectContainsPoint(self.keyboardRect, point))
+        for ( UIView *v in self.mm_dimBackgroundView.subviews )
         {
-            for ( UIView *v in self.subviews )
+            if ( [v isKindOfClass:[MMPopupView class]] )
             {
-                if ( [v isKindOfClass:[MMPopupView class]] )
-                {
-                    MMPopupView *popupView = (MMPopupView*)v;
-                    [popupView hide];
-                }
+                MMPopupView *popupView = (MMPopupView*)v;
+                [popupView hide];
             }
         }
     }
-    
-    return view;
 }
 
 - (void)notifyKeyboardChangeFrame:(NSNotification *)n
