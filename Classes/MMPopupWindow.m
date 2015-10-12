@@ -54,6 +54,7 @@
     [self makeKeyAndVisible];
     [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
     
+    self.mm_dimBackgroundView.hidden = YES;
     self.hidden = YES;
 }
 
