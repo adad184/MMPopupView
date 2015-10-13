@@ -254,6 +254,8 @@ MMSheetView
 Changelog
 ===============
 
+v1.3  Bug fixed
+
 v1.2  Now you could know whether MMPopupView is visible by using:
 
 ```
