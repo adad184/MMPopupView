@@ -101,7 +101,7 @@
                 make.top.equalTo(lastAttribute).offset(config.innerMargin);
                 make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, config.innerMargin, 0, config.innerMargin));
             }];
-            self.titleLabel.textColor = config.itemNormalColor;
+            self.titleLabel.textColor = config.titleColor;
             self.titleLabel.textAlignment = NSTextAlignmentCenter;
             self.titleLabel.font = [UIFont boldSystemFontOfSize:config.titleFontSize];
             self.titleLabel.numberOfLines = 0;
