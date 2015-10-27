@@ -15,6 +15,8 @@
 #import "MMDateView.h"
 #import "MMPopupWindow.h"
 
+#import "MMAddressView.h"
+
 @interface ViewController ()
 
 @property (nonatomic, strong) UIButton *btnAlert;
@@ -23,6 +25,8 @@
 @property (nonatomic, strong) UIButton *btnSheet;
 @property (nonatomic, strong) UIButton *btnPin;
 @property (nonatomic, strong) UIButton *btnDate;
+
+@property (nonatomic, strong) UIButton *btnAddress;
 
 @end
 
@@ -41,9 +45,10 @@
     self.btnSheet   = [UIButton buttonWithType:UIButtonTypeCustom];
     self.btnPin     = [UIButton buttonWithType:UIButtonTypeCustom];
     self.btnDate    = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.btnAddress = [UIButton buttonWithType:UIButtonTypeCustom];
 
-    NSArray *arrayButton = @[self.btnAlert, self.btnConfirm, self.btnInput, self.btnSheet, self.btnPin, self.btnDate];
-    NSArray *arrayTitle  = @[@"Alert - Default", @"Alert - Confirm", @"Alert - Input", @"Sheet - Default", @"Custom - PinView", @"Custom - DateView"];
+    NSArray *arrayButton = @[self.btnAlert, self.btnConfirm, self.btnInput, self.btnSheet, self.btnPin, self.btnDate, self.btnAddress];
+    NSArray *arrayTitle  = @[@"Alert - Default", @"Alert - Confirm", @"Alert - Input", @"Sheet - Default", @"Custom - PinView", @"Custom - DateView", @"Custom - LocalView"];
     
     for ( int i = 0 ; i < arrayButton.count; ++i )
     {
@@ -141,7 +146,16 @@
             
             break;
         }
+        case 6:
+        {
+            MMAddressView *addressView = [[MMAddressView alloc] init];
+            addressView.selectedAddress = ^(MMAddress *address) {
+                NSLog(@"%@-%@-%@",address.aProvince, address.aCity, address.aDistrict);
+            };
+            [addressView show];
             
+            break;
+        }
         default:
             break;
     }
