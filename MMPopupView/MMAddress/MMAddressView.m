@@ -119,7 +119,10 @@ static NSInteger const kDistrComponent    = 2;
     MMAddress *selectedAddress = [[MMAddress alloc] initWithProvince:_addressModel.selectedAddress.aProvince
                                                                 city:_addressModel.selectedAddress.aCity
                                                             district:_addressModel.selectedAddress.aDistrict];
-    self.selectedAddress(selectedAddress);
+    if (self.selectedAddress) {
+        self.selectedAddress(selectedAddress);
+        self.selectedAddress = nil;
+    }
     
     [self hide];
 }
@@ -186,11 +189,11 @@ static NSInteger const kDistrComponent    = 2;
         {
             [self.addressModel reloadCityAndDistrictAtRow:row];
             
-            [self.addressPickerView selectRow:0 inComponent:kCityComponent animated:YES];
-            [self.addressPickerView reloadComponent:kCityComponent];
+            [pickerView selectRow:0 inComponent:kCityComponent animated:NO];
+            [pickerView reloadComponent:kCityComponent];
             
-            [self.addressPickerView selectRow:0 inComponent:kDistrComponent animated:YES];
-            [self.addressPickerView reloadComponent:kDistrComponent];
+            [pickerView selectRow:0 inComponent:kDistrComponent animated:NO];
+            [pickerView reloadComponent:kDistrComponent];
             
              break;
         }
@@ -199,7 +202,7 @@ static NSInteger const kDistrComponent    = 2;
         {
             [self.addressModel reloadCityAtRow:row];
             
-            [self.addressPickerView selectRow:0 inComponent:kDistrComponent animated:YES];
+            [self.addressPickerView selectRow:0 inComponent:kDistrComponent animated:NO];
             [self.addressPickerView reloadComponent:kDistrComponent];
             
              break;
