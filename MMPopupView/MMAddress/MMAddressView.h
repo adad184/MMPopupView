@@ -7,14 +7,14 @@
 //
 
 #import "MMPopupView.h"
-#import "MMAddressModel.h"
+#import "MMAddressData.h"
 
 @interface MMAddressView : MMPopupView
 
 @property (nonatomic, copy) void (^selectedAddress)(MMAddress *address);
 
 /**
- *  初始化方法
+ *  自定义初始化方法
  *
  *  @param address 初始选中的地址
  *

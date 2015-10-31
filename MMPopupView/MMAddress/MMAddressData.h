@@ -23,7 +23,7 @@
 
 
 
-@interface MMAddressModel : NSObject
+@interface MMAddressData : NSObject
 
 /**
  * 当前选中的省、市、县列表

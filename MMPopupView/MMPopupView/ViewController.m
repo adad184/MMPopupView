@@ -149,10 +149,23 @@
         case 6:
         {
             MMAddressView *addressView = [[MMAddressView alloc] init];
+            
             addressView.selectedAddress = ^(MMAddress *address) {
-                NSLog(@"%@-%@-%@",address.aProvince, address.aCity, address.aDistrict);
+                NSLog(@"%@-%@-%@", address.aProvince, address.aCity, address.aDistrict);
             };
+            
             [addressView show];
+            
+//            MMAddress *customAddress = [[MMAddress alloc] initWithProvince:@"浙江省"
+//                                                                      city:@"杭州市"
+//                                                                  district:@"西湖区"];
+//            MMAddressView *customAddressView = [[MMAddressView alloc] initWithAddress:customAddress];
+//            
+//            customAddressView.selectedAddress = ^(MMAddress *address) {
+//                NSLog(@"%@-%@-%@", address.aProvince, address.aCity, address.aDistrict);
+//            };
+//            
+//            [customAddressView show];
             
             break;
         }

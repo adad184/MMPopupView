@@ -22,7 +22,7 @@
 		ED1E995F1B9C22F50093760A /* MMPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E995E1B9C22F50093760A /* MMPinView.m */; settings = {ASSET_TAGS = (); }; };
 		EDB365121B9D3323003A0B05 /* MMDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB365111B9D3323003A0B05 /* MMDateView.m */; settings = {ASSET_TAGS = (); }; };
 		FEA7A4F61BE09A2B00D074C6 /* china_address.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEA7A4F51BE09A2B00D074C6 /* china_address.plist */; settings = {ASSET_TAGS = (); }; };
-		FEE3EB1B1BDF70E7009D7AEA /* MMAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3EB181BDF70E7009D7AEA /* MMAddressModel.m */; settings = {ASSET_TAGS = (); }; };
+		FEE3EB1B1BDF70E7009D7AEA /* MMAddressData.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3EB181BDF70E7009D7AEA /* MMAddressData.m */; settings = {ASSET_TAGS = (); }; };
 		FEE3EB1C1BDF70E7009D7AEA /* MMAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3EB1A1BDF70E7009D7AEA /* MMAddressView.m */; settings = {ASSET_TAGS = (); }; };
 		FEE3EB211BDF7155009D7AEA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3EB201BDF7155009D7AEA /* ViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -56,8 +56,8 @@
 		EDB365101B9D3323003A0B05 /* MMDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDateView.h; sourceTree = SOURCE_ROOT; };
 		EDB365111B9D3323003A0B05 /* MMDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDateView.m; sourceTree = SOURCE_ROOT; };
 		FEA7A4F51BE09A2B00D074C6 /* china_address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = china_address.plist; sourceTree = "<group>"; };
-		FEE3EB171BDF70E7009D7AEA /* MMAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAddressModel.h; sourceTree = "<group>"; };
-		FEE3EB181BDF70E7009D7AEA /* MMAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAddressModel.m; sourceTree = "<group>"; };
+		FEE3EB171BDF70E7009D7AEA /* MMAddressData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAddressData.h; sourceTree = "<group>"; };
+		FEE3EB181BDF70E7009D7AEA /* MMAddressData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAddressData.m; sourceTree = "<group>"; };
 		FEE3EB191BDF70E7009D7AEA /* MMAddressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAddressView.h; sourceTree = "<group>"; };
 		FEE3EB1A1BDF70E7009D7AEA /* MMAddressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAddressView.m; sourceTree = "<group>"; };
 		FEE3EB1F1BDF7155009D7AEA /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -166,8 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				FEA7A4F51BE09A2B00D074C6 /* china_address.plist */,
-				FEE3EB171BDF70E7009D7AEA /* MMAddressModel.h */,
-				FEE3EB181BDF70E7009D7AEA /* MMAddressModel.m */,
+				FEE3EB171BDF70E7009D7AEA /* MMAddressData.h */,
+				FEE3EB181BDF70E7009D7AEA /* MMAddressData.m */,
 				FEE3EB191BDF70E7009D7AEA /* MMAddressView.h */,
 				FEE3EB1A1BDF70E7009D7AEA /* MMAddressView.m */,
 			);
@@ -280,7 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEE3EB1B1BDF70E7009D7AEA /* MMAddressModel.m in Sources */,
+				FEE3EB1B1BDF70E7009D7AEA /* MMAddressData.m in Sources */,
 				ED1E99551B9BDE4B0093760A /* MMPopupCategory.m in Sources */,
 				ED1E995F1B9C22F50093760A /* MMPinView.m in Sources */,
 				FEE3EB1C1BDF70E7009D7AEA /* MMAddressView.m in Sources */,

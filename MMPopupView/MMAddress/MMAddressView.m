@@ -12,7 +12,8 @@
 #import <Masonry/Masonry.h>
 
 
-static NSInteger const kComponentCount   = 3;
+static NSInteger const kComponentCount    = 3;
+
 static NSInteger const kProvinceComponent = 0;
 static NSInteger const kCityComponent     = 1;
 static NSInteger const kDistrComponent    = 2;
@@ -24,7 +25,7 @@ static NSInteger const kDistrComponent    = 2;
 
 @interface MMAddressView()<UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property (nonatomic, strong) MMAddressModel *addressModel;
+@property (nonatomic, strong) MMAddressData *addressModel;
 
 @property (nonatomic, strong) UIButton *btnConfirm;
 @property (nonatomic, strong) UIPickerView *addressPickerView;
@@ -36,11 +37,12 @@ static NSInteger const kDistrComponent    = 2;
 - (instancetype)init
 {
     self = [super init];
+    
     if (self) {
         
         [self configureViews];
         
-        MMAddressModel *addressModel = [[MMAddressModel alloc] init];
+        MMAddressData *addressModel = [[MMAddressData alloc] init];
         self.addressModel = addressModel;
     }
     return self;
@@ -49,13 +51,14 @@ static NSInteger const kDistrComponent    = 2;
 - (instancetype)initWithAddress:(MMAddress *)address
 {
     self = [super init];
+    
     if (self) {
         
         [self configureViews];
         
         if (address) {
             
-            MMAddressModel *addressModel = [[MMAddressModel alloc] init];
+            MMAddressData *addressModel = [[MMAddressData alloc] init];
             self.addressModel = addressModel;
             
             NSInteger provinceRow = [addressModel.provinces indexOfObject:address.aProvince];
@@ -74,11 +77,12 @@ static NSInteger const kDistrComponent    = 2;
             [self.addressPickerView selectRow:districtRow inComponent:kDistrComponent animated:NO];
             [self.addressPickerView reloadAllComponents];
         }else {
-            MMAddressModel *addressModel = [[MMAddressModel alloc] init];
+            MMAddressData *addressModel = [[MMAddressData alloc] init];
             self.addressModel = addressModel;
         }
 
     }
+    
     return self;
 }
 
@@ -202,8 +206,8 @@ static NSInteger const kDistrComponent    = 2;
         {
             [self.addressModel reloadCityAtRow:row];
             
-            [self.addressPickerView selectRow:0 inComponent:kDistrComponent animated:NO];
-            [self.addressPickerView reloadComponent:kDistrComponent];
+            [pickerView selectRow:0 inComponent:kDistrComponent animated:NO];
+            [pickerView reloadComponent:kDistrComponent];
             
              break;
         }

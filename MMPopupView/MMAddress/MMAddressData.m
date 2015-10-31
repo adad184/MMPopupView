@@ -6,7 +6,7 @@
 //  Copyright © 2015年 LJC. All rights reserved.
 //
 
-#import "MMAddressModel.h"
+#import "MMAddressData.h"
 
 @implementation MMAddress
 
@@ -27,7 +27,7 @@
 
 
 
-@interface MMAddressModel()
+@interface MMAddressData()
 
 @property (nonatomic, strong) NSDictionary *chinaAddressDict;
 
@@ -39,7 +39,7 @@
 
 @end
 
-@implementation MMAddressModel
+@implementation MMAddressData
 
 - (instancetype)init
 {
