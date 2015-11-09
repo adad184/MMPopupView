@@ -10,7 +10,6 @@
 		C3A6D7C7352C468FC6AFBD15 /* libPods-MMPopupView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4EBFF7F54A0C418E7302440 /* libPods-MMPopupView.a */; };
 		ED1E99341B9BD5C20093760A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99331B9BD5C20093760A /* main.m */; };
 		ED1E99371B9BD5C20093760A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99361B9BD5C20093760A /* AppDelegate.m */; };
-		ED1E993A1B9BD5C20093760A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99391B9BD5C20093760A /* ViewController.m */; };
 		ED1E993D1B9BD5C20093760A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1E993B1B9BD5C20093760A /* Main.storyboard */; };
 		ED1E993F1B9BD5C20093760A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1E993E1B9BD5C20093760A /* Assets.xcassets */; };
 		ED1E99421B9BD5C20093760A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1E99401B9BD5C20093760A /* LaunchScreen.storyboard */; };
@@ -22,6 +21,10 @@
 		ED1E995C1B9BEE8F0093760A /* MMSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E995B1B9BEE8F0093760A /* MMSheetView.m */; settings = {ASSET_TAGS = (); }; };
 		ED1E995F1B9C22F50093760A /* MMPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E995E1B9C22F50093760A /* MMPinView.m */; settings = {ASSET_TAGS = (); }; };
 		EDB365121B9D3323003A0B05 /* MMDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB365111B9D3323003A0B05 /* MMDateView.m */; settings = {ASSET_TAGS = (); }; };
+		FEA7A4F61BE09A2B00D074C6 /* china_address.plist in Resources */ = {isa = PBXBuildFile; fileRef = FEA7A4F51BE09A2B00D074C6 /* china_address.plist */; settings = {ASSET_TAGS = (); }; };
+		FEE3EB1B1BDF70E7009D7AEA /* MMAddressData.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3EB181BDF70E7009D7AEA /* MMAddressData.m */; settings = {ASSET_TAGS = (); }; };
+		FEE3EB1C1BDF70E7009D7AEA /* MMAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3EB1A1BDF70E7009D7AEA /* MMAddressView.m */; settings = {ASSET_TAGS = (); }; };
+		FEE3EB211BDF7155009D7AEA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3EB201BDF7155009D7AEA /* ViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +34,6 @@
 		ED1E99331B9BD5C20093760A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED1E99351B9BD5C20093760A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ED1E99361B9BD5C20093760A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ED1E99381B9BD5C20093760A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		ED1E99391B9BD5C20093760A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		ED1E993C1B9BD5C20093760A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED1E993E1B9BD5C20093760A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED1E99411B9BD5C20093760A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +55,13 @@
 		ED1E995E1B9C22F50093760A /* MMPinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMPinView.m; path = ../MMPinView.m; sourceTree = "<group>"; };
 		EDB365101B9D3323003A0B05 /* MMDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDateView.h; sourceTree = SOURCE_ROOT; };
 		EDB365111B9D3323003A0B05 /* MMDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDateView.m; sourceTree = SOURCE_ROOT; };
+		FEA7A4F51BE09A2B00D074C6 /* china_address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = china_address.plist; sourceTree = "<group>"; };
+		FEE3EB171BDF70E7009D7AEA /* MMAddressData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAddressData.h; sourceTree = "<group>"; };
+		FEE3EB181BDF70E7009D7AEA /* MMAddressData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAddressData.m; sourceTree = "<group>"; };
+		FEE3EB191BDF70E7009D7AEA /* MMAddressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAddressView.h; sourceTree = "<group>"; };
+		FEE3EB1A1BDF70E7009D7AEA /* MMAddressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAddressView.m; sourceTree = "<group>"; };
+		FEE3EB1F1BDF7155009D7AEA /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FEE3EB201BDF7155009D7AEA /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FF8DF09A03ED96B87C4FB5EA /* Pods-MMPopupView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMPopupView.release.xcconfig"; path = "Pods/Target Support Files/Pods-MMPopupView/Pods-MMPopupView.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,10 +116,11 @@
 		ED1E99311B9BD5C20093760A /* MMPopupView */ = {
 			isa = PBXGroup;
 			children = (
+				FEE3EB161BDF70E7009D7AEA /* MMAddress */,
 				ED1E99351B9BD5C20093760A /* AppDelegate.h */,
 				ED1E99361B9BD5C20093760A /* AppDelegate.m */,
-				ED1E99381B9BD5C20093760A /* ViewController.h */,
-				ED1E99391B9BD5C20093760A /* ViewController.m */,
+				FEE3EB1F1BDF7155009D7AEA /* ViewController.h */,
+				FEE3EB201BDF7155009D7AEA /* ViewController.m */,
 				ED1E995D1B9C22F50093760A /* MMPinView.h */,
 				ED1E995E1B9C22F50093760A /* MMPinView.m */,
 				EDB365101B9D3323003A0B05 /* MMDateView.h */,
@@ -152,6 +161,18 @@
 			);
 			name = Classes;
 			sourceTree = "<group>";
+		};
+		FEE3EB161BDF70E7009D7AEA /* MMAddress */ = {
+			isa = PBXGroup;
+			children = (
+				FEA7A4F51BE09A2B00D074C6 /* china_address.plist */,
+				FEE3EB171BDF70E7009D7AEA /* MMAddressData.h */,
+				FEE3EB181BDF70E7009D7AEA /* MMAddressData.m */,
+				FEE3EB191BDF70E7009D7AEA /* MMAddressView.h */,
+				FEE3EB1A1BDF70E7009D7AEA /* MMAddressView.m */,
+			);
+			path = MMAddress;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -213,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED1E99421B9BD5C20093760A /* LaunchScreen.storyboard in Resources */,
+				FEA7A4F61BE09A2B00D074C6 /* china_address.plist in Resources */,
 				ED1E993F1B9BD5C20093760A /* Assets.xcassets in Resources */,
 				ED1E993D1B9BD5C20093760A /* Main.storyboard in Resources */,
 			);
@@ -258,11 +280,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEE3EB1B1BDF70E7009D7AEA /* MMAddressData.m in Sources */,
 				ED1E99551B9BDE4B0093760A /* MMPopupCategory.m in Sources */,
-				ED1E993A1B9BD5C20093760A /* ViewController.m in Sources */,
 				ED1E995F1B9C22F50093760A /* MMPinView.m in Sources */,
+				FEE3EB1C1BDF70E7009D7AEA /* MMAddressView.m in Sources */,
 				ED1E994C1B9BD8520093760A /* MMPopupView.m in Sources */,
 				ED1E99521B9BDAFA0093760A /* MMPopupitem.m in Sources */,
+				FEE3EB211BDF7155009D7AEA /* ViewController.m in Sources */,
 				ED1E994F1B9BDAB80093760A /* MMPopupWindow.m in Sources */,
 				ED1E99591B9BEE7D0093760A /* MMAlertView.m in Sources */,
 				EDB365121B9D3323003A0B05 /* MMDateView.m in Sources */,
