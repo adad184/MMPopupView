@@ -193,7 +193,7 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
     
     [UIView animateWithDuration:self.mm_dimAnimationDuration
                           delay:0
-                        options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
+                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          
                          self.mm_dimBackgroundView.backgroundColor = MMHexColor(0x0000007F);
@@ -220,7 +220,7 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
     self.mm_dimBackgroundAnimating = YES;
     [UIView animateWithDuration:self.mm_dimAnimationDuration
                           delay:0
-                        options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
+                        options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          
                          self.mm_dimBackgroundView.backgroundColor = MMHexColor(0x00000000);

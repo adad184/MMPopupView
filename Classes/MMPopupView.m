@@ -163,22 +163,18 @@
         self.alpha = 0.0f;
         
         [UIView animateWithDuration:self.animationDuration
-                              delay:0
-                            options:UIViewAnimationOptionBeginFromCurrentState
+                              delay:0.0 options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
-                             
-                             self.layer.transform = CATransform3DIdentity;
-                             self.alpha = 1.0f;
-                             
-                         }
-                         completion:^(BOOL finished) {
-                             
-                             if ( self.showCompletionBlock )
-                             {
-                                 self.showCompletionBlock(self);
-                             }
-                             
-                         }];
+            
+            self.layer.transform = CATransform3DIdentity;
+            self.alpha = 1.0f;
+            
+        } completion:^(BOOL finished) {
+            if ( self.showCompletionBlock )
+            {
+                self.showCompletionBlock(self);
+            }
+        }];
     };
     
     return block;
@@ -192,7 +188,7 @@
         
         [UIView animateWithDuration:self.animationDuration
                               delay:0
-                            options:UIViewAnimationOptionBeginFromCurrentState
+                            options: UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
                              
                              self.alpha = 0.0f;
@@ -229,7 +225,7 @@
         
         [UIView animateWithDuration:self.animationDuration
                               delay:0
-                            options:UIViewAnimationOptionBeginFromCurrentState
+                            options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
                              
                              [self mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -260,7 +256,7 @@
         
         [UIView animateWithDuration:self.animationDuration
                               delay:0
-                            options:UIViewAnimationOptionBeginFromCurrentState
+                            options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
                              
                              [self mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -301,7 +297,7 @@
                               delay:0
              usingSpringWithDamping:0.8
               initialSpringVelocity:1.5
-                            options:UIViewAnimationOptionBeginFromCurrentState
+                            options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
                              
                              [self mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -331,7 +327,7 @@
         
         [UIView animateWithDuration:0.3
                               delay:0
-                            options:UIViewAnimationOptionBeginFromCurrentState
+                            options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
                              
                              [self mas_updateConstraints:^(MASConstraintMaker *make) {
