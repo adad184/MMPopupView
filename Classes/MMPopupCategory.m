@@ -140,6 +140,7 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
             make.edges.equalTo(self);
         }];
         dimView.hidden = YES;
+        dimView.layer.zPosition = FLT_MAX;
         
         self.mm_dimAnimationDuration = 0.3f;
         
@@ -172,6 +173,8 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
 - (void)mm_showDimBackground
 {
     ++self.mm_dimReferenceCount;
+    
+    NSLog(@"dim count: %@",@(self.mm_dimReferenceCount));
     
     if ( self.mm_dimReferenceCount > 1 )
     {

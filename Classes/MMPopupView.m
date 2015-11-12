@@ -163,7 +163,7 @@
         self.alpha = 0.0f;
         
         [UIView animateWithDuration:self.animationDuration
-                              delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+                              delay:0.0 options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
             
             self.layer.transform = CATransform3DIdentity;

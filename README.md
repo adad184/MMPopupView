@@ -254,6 +254,8 @@ MMSheetView
 Changelog
 ===============
 
+v1.4  Adjust animation easing function. Rebuild the demo.(thx to @yoavlt)
+
 v1.3  Bug fixed
 
 v1.2  Now you could know whether MMPopupView is visible by using:
