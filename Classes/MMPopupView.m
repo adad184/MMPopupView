@@ -142,7 +142,7 @@
         [self hideKeyboard];
     }
     
-    NSAssert(self.showAnimation, @"hide animation must be there");
+    NSAssert(self.hideAnimation, @"hide animation must be there");
     
     self.hideAnimation(self);
 }
