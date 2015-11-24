@@ -105,7 +105,7 @@
     
     if ( !self.attachedView )
     {
-        self.attachedView = [MMPopupWindow sharedWindow];
+        self.attachedView = [MMPopupWindow sharedWindow].attachView;
     }
     [self.attachedView mm_showDimBackground];
     
@@ -133,7 +133,7 @@
     
     if ( !self.attachedView )
     {
-        self.attachedView = [MMPopupWindow sharedWindow];
+        self.attachedView = [MMPopupWindow sharedWindow].attachView;
     }
     [self.attachedView mm_hideDimBackground];
     

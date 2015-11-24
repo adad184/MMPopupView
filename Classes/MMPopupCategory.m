@@ -8,6 +8,7 @@
 
 #import "MMPopupCategory.h"
 #import "MMPopupDefine.h"
+#import "MMPopupWindow.h"
 #import <Masonry/Masonry.h>
 #import <objc/runtime.h>
 
@@ -174,8 +175,6 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
 {
     ++self.mm_dimReferenceCount;
     
-    NSLog(@"dim count: %@",@(self.mm_dimReferenceCount));
-    
     if ( self.mm_dimReferenceCount > 1 )
     {
         return;
@@ -188,6 +187,11 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
     {
         self.hidden = NO;
         [(UIWindow*)self makeKeyAndVisible];
+    }
+    else if ( self.window == [MMPopupWindow sharedWindow] )
+    {
+        self.window.hidden = NO;
+        [self.window makeKeyAndVisible];
     }
     else
     {
@@ -238,6 +242,11 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
                              if ( [self isKindOfClass:[UIWindow class]] )
                              {
                                  self.hidden = YES;
+                                 [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
+                             }
+                             else if ( self.window == [MMPopupWindow sharedWindow] )
+                             {
+                                 self.window.hidden = YES;
                                  [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
                              }
                          }

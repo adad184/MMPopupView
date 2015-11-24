@@ -41,9 +41,8 @@
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        
         window = [[MMPopupWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        
+        window.rootViewController = [UIViewController new];
     });
     
     return window;
@@ -52,9 +51,9 @@
 - (void)cacheWindow
 {
     [self makeKeyAndVisible];
-    [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
+    [[[UIApplication sharedApplication].delegate window] makeKeyAndVisible];
     
-    self.mm_dimBackgroundView.hidden = YES;
+    [self attachView].mm_dimBackgroundView.hidden = YES;
     self.hidden = YES;
 }
 
@@ -62,7 +61,7 @@
 {
     if ( self.touchWildToHide && !self.mm_dimBackgroundAnimating )
     {
-        for ( UIView *v in self.mm_dimBackgroundView.subviews )
+        for ( UIView *v in self.rootViewController.view.mm_dimBackgroundView.subviews )
         {
             if ( [v isKindOfClass:[MMPopupView class]] )
             {
@@ -77,6 +76,11 @@
 {
     NSValue *keyboardBoundsValue = [[n userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
     self.keyboardRect = [keyboardBoundsValue CGRectValue];
+}
+
+- (UIView *)attachView
+{
+    return self.rootViewController.view;
 }
 
 @end
