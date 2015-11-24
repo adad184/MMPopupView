@@ -13,8 +13,6 @@
 
 @interface MMPopupWindow()
 
-@property (nonatomic, assign) CGRect keyboardRect;
-
 @end
 
 @implementation MMPopupWindow
@@ -26,8 +24,6 @@
     if ( self )
     {
         self.windowLevel = UIWindowLevelStatusBar + 1;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyKeyboardChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
         
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTap:)];
         [self addGestureRecognizer:gesture];
@@ -61,7 +57,7 @@
 {
     if ( self.touchWildToHide && !self.mm_dimBackgroundAnimating )
     {
-        for ( UIView *v in self.rootViewController.view.mm_dimBackgroundView.subviews )
+        for ( UIView *v in [self attachView].mm_dimBackgroundView.subviews )
         {
             if ( [v isKindOfClass:[MMPopupView class]] )
             {
@@ -70,12 +66,6 @@
             }
         }
     }
-}
-
-- (void)notifyKeyboardChangeFrame:(NSNotification *)n
-{
-    NSValue *keyboardBoundsValue = [[n userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
-    self.keyboardRect = [keyboardBoundsValue CGRectValue];
 }
 
 - (UIView *)attachView
