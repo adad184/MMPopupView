@@ -183,15 +183,15 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
     self.mm_dimBackgroundView.hidden = NO;
     self.mm_dimBackgroundAnimating = YES;
     
-    if ( [self isKindOfClass:[UIWindow class]] )
+    if ( self == [MMPopupWindow sharedWindow].attachView )
+    {
+        [MMPopupWindow sharedWindow].hidden = NO;
+        [[MMPopupWindow sharedWindow] makeKeyAndVisible];
+    }
+    else if ( [self isKindOfClass:[UIWindow class]] )
     {
         self.hidden = NO;
         [(UIWindow*)self makeKeyAndVisible];
-    }
-    else if ( self.window == [MMPopupWindow sharedWindow] )
-    {
-        self.window.hidden = NO;
-        [self.window makeKeyAndVisible];
     }
     else
     {
@@ -239,14 +239,14 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
                              self.mm_dimBackgroundView.hidden = YES;
                              self.mm_dimBackgroundAnimating = NO;
                              
-                             if ( [self isKindOfClass:[UIWindow class]] )
+                             if ( self == [MMPopupWindow sharedWindow].attachView )
                              {
-                                 self.hidden = YES;
+                                 [MMPopupWindow sharedWindow].hidden = YES;
                                  [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
                              }
-                             else if ( self.window == [MMPopupWindow sharedWindow] )
+                             else if ( [self isKindOfClass:[UIWindow class]] )
                              {
-                                 self.window.hidden = YES;
+                                 self.hidden = YES;
                                  [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
                              }
                          }

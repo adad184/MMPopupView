@@ -50,7 +50,7 @@ UITableViewDataSource
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
-    [[MMPopupWindow sharedWindow] cacheWindow];
+//    [[MMPopupWindow sharedWindow] cacheWindow];
     [MMPopupWindow sharedWindow].touchWildToHide = YES;
     
     MMAlertViewConfig *alertConfig = [MMAlertViewConfig globalConfig];
