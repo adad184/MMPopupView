@@ -254,6 +254,8 @@ MMSheetView
 Changelog
 ===============
 
+v1.5.1  Fixed showing problem
+
 v1.5  Fixed rotation problem
 
 v1.4  Adjust animation easing function. Rebuild the demo.(thx to @yoavlt)
