@@ -26,6 +26,7 @@
         self.windowLevel = UIWindowLevelStatusBar + 1;
         
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTap:)];
+        gesture.cancelsTouchesInView = NO;
         [self addGestureRecognizer:gesture];
     }
     return self;
