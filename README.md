@@ -254,6 +254,8 @@ MMSheetView
 Changelog
 ===============
 
+v1.5.2  Fixed touch problem when there are scrollviews in custom view
+
 v1.5.1  Fixed showing problem
 
 v1.5  Fixed rotation problem
