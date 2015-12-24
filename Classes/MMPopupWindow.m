@@ -12,6 +12,9 @@
 #import "MMPopupView.h"
 
 @interface MMPopupWindow()
+<
+UIGestureRecognizerDelegate
+>
 
 @end
 
@@ -27,6 +30,7 @@
         
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTap:)];
         gesture.cancelsTouchesInView = NO;
+        gesture.delegate = self;
         [self addGestureRecognizer:gesture];
     }
     return self;
@@ -67,6 +71,11 @@
             }
         }
     }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return ( touch.view == self.attachView.mm_dimBackgroundView );
 }
 
 - (UIView *)attachView
