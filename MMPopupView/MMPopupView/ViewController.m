@@ -96,7 +96,7 @@ UITableViewDataSource
         NSLog(@"clickd %@ button",@(index));
     };
     
-    MMPopupBlock completeBlock = ^(MMPopupView *popupView){
+    MMPopupCompletionBlock completeBlock = ^(MMPopupView *popupView, BOOL finish){
         NSLog(@"animation complete");
     };
     
@@ -153,6 +153,10 @@ UITableViewDataSource
             MMDateView *dateView = [MMDateView new];
             
             [dateView showWithBlock:completeBlock];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MMDateView hideAll];
+            });
             
             break;
         }
