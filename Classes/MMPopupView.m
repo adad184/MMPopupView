@@ -263,7 +263,7 @@ static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNot
                              
                              if ( self.showCompletionBlock )
                              {
-                                 self.showCompletionBlock(self, nil);
+                                 self.showCompletionBlock(self, finished);
                              }
                              
                          }];
