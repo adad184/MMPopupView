@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMPopupItem.h"
+#import "MMPopupWindow.h"
+#import "MMPopupCategory.h"
+#import "MMPopupDefine.h"
 
 typedef NS_ENUM(NSUInteger, MMPopupType) {
     MMPopupTypeAlert,
