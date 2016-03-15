@@ -14,14 +14,14 @@
 		ED1E993D1B9BD5C20093760A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1E993B1B9BD5C20093760A /* Main.storyboard */; };
 		ED1E993F1B9BD5C20093760A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1E993E1B9BD5C20093760A /* Assets.xcassets */; };
 		ED1E99421B9BD5C20093760A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1E99401B9BD5C20093760A /* LaunchScreen.storyboard */; };
-		ED1E994C1B9BD8520093760A /* MMPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E994B1B9BD8520093760A /* MMPopupView.m */; settings = {ASSET_TAGS = (); }; };
-		ED1E994F1B9BDAB80093760A /* MMPopupWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E994E1B9BDAB80093760A /* MMPopupWindow.m */; settings = {ASSET_TAGS = (); }; };
-		ED1E99521B9BDAFA0093760A /* MMPopupitem.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99511B9BDAFA0093760A /* MMPopupitem.m */; settings = {ASSET_TAGS = (); }; };
-		ED1E99551B9BDE4B0093760A /* MMPopupCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99541B9BDE4B0093760A /* MMPopupCategory.m */; settings = {ASSET_TAGS = (); }; };
-		ED1E99591B9BEE7D0093760A /* MMAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99581B9BEE7D0093760A /* MMAlertView.m */; settings = {ASSET_TAGS = (); }; };
-		ED1E995C1B9BEE8F0093760A /* MMSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E995B1B9BEE8F0093760A /* MMSheetView.m */; settings = {ASSET_TAGS = (); }; };
-		ED1E995F1B9C22F50093760A /* MMPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E995E1B9C22F50093760A /* MMPinView.m */; settings = {ASSET_TAGS = (); }; };
-		EDB365121B9D3323003A0B05 /* MMDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB365111B9D3323003A0B05 /* MMDateView.m */; settings = {ASSET_TAGS = (); }; };
+		ED1E994C1B9BD8520093760A /* MMPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E994B1B9BD8520093760A /* MMPopupView.m */; };
+		ED1E994F1B9BDAB80093760A /* MMPopupWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E994E1B9BDAB80093760A /* MMPopupWindow.m */; };
+		ED1E99521B9BDAFA0093760A /* MMPopupitem.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99511B9BDAFA0093760A /* MMPopupitem.m */; };
+		ED1E99551B9BDE4B0093760A /* MMPopupCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99541B9BDE4B0093760A /* MMPopupCategory.m */; };
+		ED1E99591B9BEE7D0093760A /* MMAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99581B9BEE7D0093760A /* MMAlertView.m */; };
+		ED1E995C1B9BEE8F0093760A /* MMSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E995B1B9BEE8F0093760A /* MMSheetView.m */; };
+		ED1E995F1B9C22F50093760A /* MMPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E995E1B9C22F50093760A /* MMPinView.m */; };
+		EDB365121B9D3323003A0B05 /* MMDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB365111B9D3323003A0B05 /* MMDateView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -381,11 +381,14 @@
 			baseConfigurationReference = 41200EBF1F3357F293167C6D /* Pods-MMPopupView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MMPopupView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adad184.MMPopupView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -394,11 +397,14 @@
 			baseConfigurationReference = FF8DF09A03ED96B87C4FB5EA /* Pods-MMPopupView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MMPopupView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adad184.MMPopupView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

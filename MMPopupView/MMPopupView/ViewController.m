@@ -61,6 +61,8 @@ UITableViewDataSource
     alertConfig.defaultTextConfirm = @"Confirm";
     
     sheetConfig.defaultTextCancel = @"Cancel";
+    
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -68,6 +70,7 @@ UITableViewDataSource
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     cell.textLabel.text = @[@"Alert - Default", @"Alert - Confirm", @"Alert - Input", @"Sheet - Default", @"Custom - PinView", @"Custom - DateView"][indexPath.row];
+    cell.textLabel.textColor = [UIColor redColor];
     
     return cell;
 }
@@ -96,7 +99,7 @@ UITableViewDataSource
         NSLog(@"clickd %@ button",@(index));
     };
     
-    MMPopupBlock completeBlock = ^(MMPopupView *popupView){
+    MMPopupCompletionBlock completeBlock = ^(MMPopupView *popupView, BOOL finished){
         NSLog(@"animation complete");
     };
     
@@ -111,7 +114,9 @@ UITableViewDataSource
             MMAlertView *alertView = [[MMAlertView alloc] initWithTitle:@"AlertView"
                                          detail:@"each button take one row if there are more than 2 items"
                                           items:items];
-            alertView.attachedView = self.tableView.superview;
+            alertView.attachedView = self.view;
+            alertView.attachedView.mm_dimBackgroundBlurEnabled = YES;
+            alertView.attachedView.mm_dimBackgroundBlurEffectStyle = UIBlurEffectStyleLight;
             
             [alertView show];
             
@@ -119,14 +124,23 @@ UITableViewDataSource
         }
         case 1:
         {
-            [[[MMAlertView alloc] initWithConfirmTitle:@"AlertView" detail:@"Confirm Dialog"] showWithBlock:completeBlock];
+            MMAlertView *alertView = [[MMAlertView alloc] initWithConfirmTitle:@"AlertView" detail:@"Confirm Dialog"];
+            alertView.attachedView = self.view;
+            alertView.attachedView.mm_dimBackgroundBlurEnabled = YES;
+            alertView.attachedView.mm_dimBackgroundBlurEffectStyle = UIBlurEffectStyleDark;
+            [alertView showWithBlock:completeBlock];
             break;
         }
         case 2:
         {
-            [[[MMAlertView alloc] initWithInputTitle:@"AlertView" detail:@"Input Dialog" placeholder:@"Your placeholder" handler:^(NSString *text) {
+            MMAlertView *alertView = [[MMAlertView alloc] initWithInputTitle:@"AlertView" detail:@"Input Dialog" placeholder:@"Your placeholder" handler:^(NSString *text) {
                 NSLog(@"input:%@",text);
-            }] showWithBlock:completeBlock];
+            }];
+            alertView.attachedView = self.view;
+            alertView.attachedView.mm_dimBackgroundBlurEnabled = YES;
+            alertView.attachedView.mm_dimBackgroundBlurEffectStyle = UIBlurEffectStyleExtraLight;
+            [alertView showWithBlock:completeBlock];
+            
             break;
         }
         case 3:
@@ -136,8 +150,11 @@ UITableViewDataSource
               MMItemMake(@"Highlight", MMItemTypeHighlight, block),
               MMItemMake(@"Disabled", MMItemTypeDisabled, block)];
             
-            [[[MMSheetView alloc] initWithTitle:@"SheetView"
-                                          items:items] showWithBlock:completeBlock];
+            MMSheetView *sheetView = [[MMSheetView alloc] initWithTitle:@"SheetView"
+                                                                  items:items];
+            sheetView.attachedView = self.view;
+            sheetView.attachedView.mm_dimBackgroundBlurEnabled = NO;
+            [sheetView showWithBlock:completeBlock];
             break;
         }
         case 4:

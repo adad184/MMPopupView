@@ -12,19 +12,9 @@
 #import "MMPopupCategory.h"
 #import <Masonry/Masonry.h>
 
-@implementation MMPopupView
+static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNotification";
 
-- (instancetype)init
-{
-    self = [super init];
-    
-    if ( self )
-    {
-        [self setup];
-    }
-    
-    return self;
-}
+@implementation MMPopupView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -42,6 +32,27 @@
 {
     self.type = MMPopupTypeAlert;
     self.animationDuration = 0.3f;
+    self.attachedView = [MMPopupWindow sharedWindow].attachView;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyHideAll:) name:MMPopupViewHideAllNotification object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MMPopupViewHideAllNotification object:nil];
+}
+
+- (void)notifyHideAll:(NSNotification*)n
+{
+    if ( [self isKindOfClass:n.object] )
+    {
+        [self hide];
+    }
+}
+
++ (void)hideAll
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:MMPopupViewHideAllNotification object:[self class]];
 }
 
 - (BOOL)visible
@@ -96,7 +107,7 @@
     [self showWithBlock:nil];
 }
 
-- (void)showWithBlock:(MMPopupBlock)block
+- (void)showWithBlock:(MMPopupCompletionBlock)block
 {
     if ( block )
     {
@@ -109,9 +120,11 @@
     }
     [self.attachedView mm_showDimBackground];
     
-    NSAssert(self.showAnimation, @"show animation must be there");
+    MMPopupBlock showAnimation = self.showAnimation;
     
-    self.showAnimation(self);
+    NSAssert(showAnimation, @"show animation must be there");
+    
+    showAnimation(self);
     
     if ( self.withKeyboard )
     {
@@ -124,7 +137,7 @@
     [self hideWithBlock:nil];
 }
 
-- (void)hideWithBlock:(MMPopupBlock)block
+- (void)hideWithBlock:(MMPopupCompletionBlock)block
 {
     if ( block )
     {
@@ -142,9 +155,11 @@
         [self hideKeyboard];
     }
     
-    NSAssert(self.hideAnimation, @"hide animation must be there");
+    MMPopupBlock hideAnimation = self.hideAnimation;
     
-    self.hideAnimation(self);
+    NSAssert(hideAnimation, @"hide animation must be there");
+    
+    hideAnimation(self);
 }
 
 - (MMPopupBlock)alertShowAnimation
@@ -153,11 +168,14 @@
     MMPopupBlock block = ^(MMPopupView *popupView){
         MMStrongify(self);
         
-        [self.attachedView.mm_dimBackgroundView addSubview:self];
-        [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, self.withKeyboard?-216/2:0));
-        }];
-        [self layoutIfNeeded];
+        if ( !self.superview )
+        {
+            [self.attachedView.mm_dimBackgroundView addSubview:self];
+            [self mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, self.withKeyboard?-216/2:0));
+            }];
+            [self layoutIfNeeded];
+        }
         
         self.layer.transform = CATransform3DMakeScale(1.2f, 1.2f, 1.0f);
         self.alpha = 0.0f;
@@ -165,16 +183,17 @@
         [UIView animateWithDuration:self.animationDuration
                               delay:0.0 options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
-            
-            self.layer.transform = CATransform3DIdentity;
-            self.alpha = 1.0f;
-            
-        } completion:^(BOOL finished) {
-            if ( self.showCompletionBlock )
-            {
-                self.showCompletionBlock(self);
-            }
-        }];
+                             
+                             self.layer.transform = CATransform3DIdentity;
+                             self.alpha = 1.0f;
+                             
+                         } completion:^(BOOL finished) {
+                             
+                             if ( self.showCompletionBlock )
+                             {
+                                 self.showCompletionBlock(self, finished);
+                             }
+                         }];
     };
     
     return block;
@@ -196,11 +215,14 @@
                          }
                          completion:^(BOOL finished) {
                              
-                             [self removeFromSuperview];
+                             if ( finished )
+                             {
+                                 [self removeFromSuperview];
+                             }
                              
                              if ( self.hideCompletionBlock )
                              {
-                                 self.hideCompletionBlock(self);
+                                 self.hideCompletionBlock(self, finished);
                              }
                              
                          }];
@@ -215,13 +237,16 @@
     MMPopupBlock block = ^(MMPopupView *popupView){
         MMStrongify(self);
         
-        [self.attachedView.mm_dimBackgroundView addSubview:self];
-        
-        [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.attachedView);
-            make.bottom.equalTo(self.attachedView.mas_bottom).offset(self.attachedView.frame.size.height);
-        }];
-        [self layoutIfNeeded];
+        if ( !self.superview )
+        {
+            [self.attachedView.mm_dimBackgroundView addSubview:self];
+            
+            [self mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self.attachedView);
+                make.bottom.equalTo(self.attachedView.mas_bottom).offset(self.attachedView.frame.size.height);
+            }];
+            [self layoutIfNeeded];
+        }
         
         [UIView animateWithDuration:self.animationDuration
                               delay:0
@@ -239,7 +264,7 @@
                              
                              if ( self.showCompletionBlock )
                              {
-                                 self.showCompletionBlock(self);
+                                 self.showCompletionBlock(self, finished);
                              }
                              
                          }];
@@ -268,11 +293,14 @@
                          }
                          completion:^(BOOL finished) {
                              
-                             [self removeFromSuperview];
+                             if ( finished )
+                             {
+                                 [self removeFromSuperview];
+                             }
                              
                              if ( self.hideCompletionBlock )
                              {
-                                 self.hideCompletionBlock(self);
+                                 self.hideCompletionBlock(self, finished);
                              }
                              
                          }];
@@ -287,11 +315,14 @@
     MMPopupBlock block = ^(MMPopupView *popupView){
         MMStrongify(self);
         
-        [self.attachedView.mm_dimBackgroundView addSubview:self];
-        [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, -self.attachedView.bounds.size.height));
-        }];
-        [self layoutIfNeeded];
+        if ( !self.superview )
+        {
+            [self.attachedView.mm_dimBackgroundView addSubview:self];
+            [self mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, -self.attachedView.bounds.size.height));
+            }];
+            [self layoutIfNeeded];
+        }
         
         [UIView animateWithDuration:self.animationDuration
                               delay:0
@@ -310,7 +341,7 @@
                              
                              if ( self.showCompletionBlock )
                              {
-                                 self.showCompletionBlock(self);
+                                 self.showCompletionBlock(self, finished);
                              }
                              
                          }];
@@ -338,8 +369,15 @@
                              
                          } completion:^(BOOL finished) {
                              
-                             [self removeFromSuperview];
+                             if ( finished )
+                             {
+                                 [self removeFromSuperview];
+                             }
                              
+                             if ( self.hideCompletionBlock )
+                             {
+                                 self.hideCompletionBlock(self, finished);
+                             }
                          }];
     };
     

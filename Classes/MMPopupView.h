@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMPopupItem.h"
+#import "MMPopupWindow.h"
+#import "MMPopupCategory.h"
+#import "MMPopupDefine.h"
 
 typedef NS_ENUM(NSUInteger, MMPopupType) {
     MMPopupTypeAlert,
@@ -17,6 +21,7 @@ typedef NS_ENUM(NSUInteger, MMPopupType) {
 @class MMPopupView;
 
 typedef void(^MMPopupBlock)(MMPopupView *);
+typedef void(^MMPopupCompletionBlock)(MMPopupView *, BOOL);
 
 @interface MMPopupView : UIView
 
@@ -28,8 +33,8 @@ typedef void(^MMPopupBlock)(MMPopupView *);
 @property (nonatomic, assign          ) NSTimeInterval animationDuration;   // default is 0.3 sec.
 @property (nonatomic, assign          ) BOOL           withKeyboard;        // default is NO. When YES, alert view with be shown with a center offset (only effect with MMPopupTypeAlert).
 
-@property (nonatomic, copy            ) MMPopupBlock   showCompletionBlock; // show completion block.
-@property (nonatomic, copy            ) MMPopupBlock   hideCompletionBlock; // hide completion block
+@property (nonatomic, copy            ) MMPopupCompletionBlock   showCompletionBlock; // show completion block.
+@property (nonatomic, copy            ) MMPopupCompletionBlock   hideCompletionBlock; // hide completion block
 
 @property (nonatomic, copy            ) MMPopupBlock   showAnimation;       // custom show animation block.
 @property (nonatomic, copy            ) MMPopupBlock   hideAnimation;       // custom hide animation block.
@@ -55,7 +60,7 @@ typedef void(^MMPopupBlock)(MMPopupView *);
  *
  *  @param block show completion block
  */
-- (void) showWithBlock:(MMPopupBlock)block;
+- (void) showWithBlock:(MMPopupCompletionBlock)block;
 
 /**
  *  hide the popup view
@@ -67,6 +72,11 @@ typedef void(^MMPopupBlock)(MMPopupView *);
  *
  *  @param block hide completion block
  */
-- (void) hideWithBlock:(MMPopupBlock)block;
+- (void) hideWithBlock:(MMPopupCompletionBlock)block;
+
+/**
+ *  hide all popupview with current class, eg. [MMAlertview hideAll];
+ */
++ (void) hideAll;
 
 @end
