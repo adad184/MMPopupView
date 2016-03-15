@@ -159,18 +159,18 @@
 
 - (void)startCountDown
 {
-    [self stopCountDown];
-    
-    self.nCountdown = 30;
-    
-    self.btnCountDown.enabled = NO;
-    
-    [self checkCountDown];
+//    [self stopCountDown];
+//    
+//    self.nCountdown = 30;
+//    
+//    self.btnCountDown.enabled = NO;
+//    
+//    [self checkCountDown];
 }
 
 - (void)stopCountDown
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkCountDown) object:nil];
+//    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkCountDown) object:nil];
 }
 
 - (void)checkCountDown
