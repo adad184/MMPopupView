@@ -259,6 +259,22 @@ MMSheetView
 
 Changelog
 ===============
+v1.7    Add blur effect.
+
+```objc
+@interface UIView (MMPopup)
+@property (nonatomic, strong, readonly ) UIView            *mm_dimBackgroundBlurView;
+@property (nonatomic, assign           ) BOOL              mm_dimBackgroundBlurEnabled;
+@property (nonatomic, assign           ) UIBlurEffectStyle mm_dimBackgroundBlurEffectStyle;
+@end
+```
+e.g.
+```objc
+alertView.attachedView = self.view;
+alertView.attachedView.mm_dimBackgroundBlurEnabled = YES;
+alertView.attachedView.mm_dimBackgroundBlurEffectStyle = UIBlurEffectStyleLight;
+```
+
 v1.6    Add '+ hideAll' method, improve code struct.
 
 v1.5.3  Fixed touch problem with `touchWildToHide`
@@ -267,13 +283,13 @@ v1.5.2  Fixed touch problem when there are scrollviews in custom view
 
 v1.5.1  Fixed showing problem
 
-v1.5  Fixed rotation problem
+v1.5    Fixed rotation problem
 
-v1.4  Adjust animation easing function. Rebuild the demo.(thx to @yoavlt)
+v1.4    Adjust animation easing function. Rebuild the demo.(thx to @yoavlt)
 
-v1.3  Bug fixed
+v1.3    Bug fixed
 
-v1.2  Now you could know whether MMPopupView is visible by using:
+v1.2    Now you could know whether MMPopupView is visible by using:
 
 ```
 @property (nonatomic, assign, readonly) BOOL           visible;             // default is NO.
