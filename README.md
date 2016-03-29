@@ -259,6 +259,7 @@ MMSheetView
 
 Changelog
 ===============
+v1.7.1  Fix black screen problem when attachView is the main keyWindow.
 v1.7    Add blur effect.
 
 ```objc
