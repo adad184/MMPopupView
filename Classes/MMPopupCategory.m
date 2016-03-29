@@ -331,7 +331,7 @@ static const void *mm_dimBackgroundBlurEffectStyleKey = &mm_dimBackgroundBlurEff
                                  [MMPopupWindow sharedWindow].hidden = YES;
                                  [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
                              }
-                             else if ( [self isKindOfClass:[UIWindow class]] )
+                             else if ( self == [MMPopupWindow sharedWindow] )
                              {
                                  self.hidden = YES;
                                  [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
