@@ -225,6 +225,7 @@ static const void *mm_dimBackgroundBlurEffectStyleKey = &mm_dimBackgroundBlurEff
         {
             blurView.backgroundColor = @[MMHexColor(0x000007F),MMHexColor(0xFFFFFF7F),MMHexColor(0xFFFFFF7F)][self.mm_dimBackgroundBlurEffectStyle];
         }
+        blurView.userInteractionEnabled = NO;
         
         objc_setAssociatedObject(self, mm_dimBackgroundBlurViewKey, blurView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }

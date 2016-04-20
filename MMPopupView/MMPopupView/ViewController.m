@@ -114,7 +114,7 @@ UITableViewDataSource
             MMAlertView *alertView = [[MMAlertView alloc] initWithTitle:@"AlertView"
                                          detail:@"each button take one row if there are more than 2 items"
                                           items:items];
-            alertView.attachedView = self.view;
+//            alertView.attachedView = self.view;
             alertView.attachedView.mm_dimBackgroundBlurEnabled = YES;
             alertView.attachedView.mm_dimBackgroundBlurEffectStyle = UIBlurEffectStyleLight;
             
