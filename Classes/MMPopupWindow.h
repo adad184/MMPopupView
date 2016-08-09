@@ -21,3 +21,11 @@
 - (void) cacheWindow;
 
 @end
+
+@interface MMPopupWindowRootViewController : UIViewController
+
+@property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
+
++ (instancetype)sharedInstance;
+
+@end

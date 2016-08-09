@@ -43,7 +43,7 @@ UIGestureRecognizerDelegate
     
     dispatch_once(&onceToken, ^{
         window = [[MMPopupWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        window.rootViewController = [UIViewController new];
+        window.rootViewController = [MMPopupWindowRootViewController sharedInstance];
     });
     
     return window;
@@ -81,6 +81,35 @@ UIGestureRecognizerDelegate
 - (UIView *)attachView
 {
     return self.rootViewController.view;
+}
+
+@end
+
+@implementation MMPopupWindowRootViewController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.statusBarStyle = UIStatusBarStyleDefault;
+    }
+    return self;
+}
+
++ (instancetype)sharedInstance
+{
+    static MMPopupWindowRootViewController * instance = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[MMPopupWindowRootViewController alloc] init];
+    });
+    
+    return instance;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return self.statusBarStyle;
 }
 
 @end
