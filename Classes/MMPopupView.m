@@ -245,7 +245,7 @@ static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNot
                 make.centerX.equalTo(self.attachedView);
                 make.bottom.equalTo(self.attachedView.mas_bottom).offset(self.attachedView.frame.size.height);
             }];
-            [self layoutIfNeeded];
+            [self.superview layoutIfNeeded];
         }
         
         [UIView animateWithDuration:self.animationDuration
