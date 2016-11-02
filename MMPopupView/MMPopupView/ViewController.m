@@ -97,7 +97,7 @@
                                          detail:@"each button take one row if there are more than 2 items"
                                           items:items];
             alertView.attachedView = self.view;
-//            alertView.hidePassively = YES;
+            
             [alertView show];
             
             break;
