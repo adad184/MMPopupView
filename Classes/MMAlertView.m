@@ -253,14 +253,16 @@
     
     if ( self.withKeyboard && (btn.tag==1) )
     {
-        if ( self.inputView.text.length > 0 )
+        if ( self.inputView.text.length > 0 && !self.hidePassively)
         {
             [self hide];
         }
     }
     else
     {
-        [self hide];
+        if (!self.hidePassively) {
+            [self hide];
+        }
     }
     
     if ( self.inputHandler && (btn.tag>0) )
