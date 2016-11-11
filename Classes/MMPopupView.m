@@ -174,6 +174,7 @@ static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNot
             [self mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, self.withKeyboard?-216/2:0));
             }];
+            [self.superview layoutIfNeeded];
             [self layoutIfNeeded];
         }
         
@@ -245,6 +246,7 @@ static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNot
                 make.centerX.equalTo(self.attachedView);
                 make.bottom.equalTo(self.attachedView.mas_bottom).offset(self.attachedView.frame.size.height);
             }];
+            [self.superview layoutIfNeeded];
             [self layoutIfNeeded];
         }
         
@@ -321,6 +323,7 @@ static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNot
             [self mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, -self.attachedView.bounds.size.height));
             }];
+            [self.superview layoutIfNeeded];
             [self layoutIfNeeded];
         }
         
