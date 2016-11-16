@@ -120,7 +120,7 @@
                 make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, config.innerMargin, 0, config.innerMargin));
             }];
             self.detailLabel.textColor = config.detailColor;
-            self.detailLabel.textAlignment = NSTextAlignmentCenter;
+            self.detailLabel.textAlignment = config.detailTextAlignment;
             self.detailLabel.font = [UIFont systemFontOfSize:config.detailFontSize];
             self.detailLabel.numberOfLines = 0;
             self.detailLabel.backgroundColor = self.backgroundColor;
@@ -363,6 +363,8 @@
         self.defaultTextOK      = @"好";
         self.defaultTextCancel  = @"取消";
         self.defaultTextConfirm = @"确定";
+        
+        self.detailTextAlignment = NSTextAlignmentCenter;
     }
     
     return self;

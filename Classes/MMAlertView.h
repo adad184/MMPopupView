@@ -59,4 +59,6 @@ typedef void(^MMPopupInputHandler)(NSString *text);
 @property (nonatomic, strong) NSString *defaultTextCancel;  // Default is "取消".
 @property (nonatomic, strong) NSString *defaultTextConfirm; // Default is "确定".
 
+@property (nonatomic) NSTextAlignment detailTextAlignment;  // Default is NSTextAlignmentCenter
+
 @end
