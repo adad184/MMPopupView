@@ -58,8 +58,9 @@
         [self.btnConfirm setTitleColor:MMHexColor(0xE76153FF) forState:UIControlStateNormal];
         
         self.datePicker = [UIDatePicker new];
-        NSLocale *local = [NSLocale systemLocale];
-        self.datePicker.locale = local;
+        self.datePicker.datePickerMode = UIDatePickerModeDate;
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+        self.datePicker.locale = locale;
         [self addSubview:self.datePicker];
         [self.datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self).insets(UIEdgeInsetsMake(50, 0, 0, 0));

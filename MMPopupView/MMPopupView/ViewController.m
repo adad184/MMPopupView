@@ -96,7 +96,8 @@
             NSArray *items =
             @[MMItemMake(@"Done", MMItemTypeNormal, block),
               MMItemMake(@"Save", MMItemTypeHighlight, block),
-              MMItemMake(@"Cancel", MMItemTypeNormal, block)];
+//              MMItemMake(@"Cancel", MMItemTypeNormal, block)
+              ];
             
             MMAlertView *alertView = [[MMAlertView alloc] initWithTitle:@"AlertView"
                                          detail:@"each button take one row if there are more than 2 items"
