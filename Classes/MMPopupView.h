@@ -12,8 +12,6 @@
 #import "MMPopupCategory.h"
 #import "MMPopupDefine.h"
 
-//hide notification
-UIKIT_EXTERN NSString *const MMPopupViewWillDisappearNotification;
 
 typedef NS_ENUM(NSUInteger, MMPopupType) {
     MMPopupTypeAlert,
@@ -26,7 +24,7 @@ typedef NS_ENUM(NSUInteger, MMPopupType) {
 typedef void(^MMPopupBlock)(MMPopupView *);
 typedef void(^MMPopupCompletionBlock)(MMPopupView *, BOOL);
 
-@interface MMPopupView : UIView
+@interface MMPopupView : UIView<MMPopupWindowWildToHideProtocol>
 
 @property (nonatomic, assign, readonly) BOOL           visible;             // default is NO.
 

@@ -168,6 +168,11 @@
 //    [self checkCountDown];
 }
 
+- (void)touchwildToHideHandler{
+    
+    NSLog(@"66666");
+}
+
 - (void)stopCountDown
 {
 //    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkCountDown) object:nil];

@@ -13,7 +13,7 @@
 #import <Masonry/Masonry.h>
 
 static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNotification";
-NSString * const MMPopupViewWillDisappearNotification = @"MMPopupViewWillDisappearNotification";
+
 
 @implementation MMPopupView
 
@@ -36,11 +36,14 @@ NSString * const MMPopupViewWillDisappearNotification = @"MMPopupViewWillDisappe
     self.attachedView = [MMPopupWindow sharedWindow].attachView;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyHideAll:) name:MMPopupViewHideAllNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyTouchWildToHide:) name:MMPopupWindowWildToHideNotification object:self];
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MMPopupViewHideAllNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MMPopupWindowWildToHideNotification object:self];
 }
 
 - (void)notifyHideAll:(NSNotification*)n
@@ -49,6 +52,18 @@ NSString * const MMPopupViewWillDisappearNotification = @"MMPopupViewWillDisappe
     {
         [self hide];
     }
+}
+
+- (void)notifyTouchWildToHide:(NSNotification*)n{
+    
+    if ([self isEqual:n.object]) {
+    
+        if ([self respondsToSelector:@selector(touchwildToHideHandler)]) {
+            
+            [self touchwildToHideHandler];
+        }
+    }
+    
 }
 
 + (void)hideAll
@@ -155,8 +170,6 @@ NSString * const MMPopupViewWillDisappearNotification = @"MMPopupViewWillDisappe
     {
         [self hideKeyboard];
     }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:MMPopupViewWillDisappearNotification object:self];
     
     MMPopupBlock hideAnimation = self.hideAnimation;
     

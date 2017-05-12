@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+//touchWildToHide notification
+UIKIT_EXTERN NSString *const MMPopupWindowWildToHideNotification;
+
+@protocol MMPopupWindowWildToHideProtocol <NSObject>
+
+/**
+ MMPopupWindowWildToHideHandler
+ */
+- (void)touchwildToHideHandler;
+
+@end
+
+
+
 @interface MMPopupWindow : UIWindow
 
 @property (nonatomic, assign) BOOL touchWildToHide; // default is NO. When YES, popup views will be hidden when user touch the translucent background.
