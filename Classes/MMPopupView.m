@@ -13,6 +13,7 @@
 #import <Masonry/Masonry.h>
 
 static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNotification";
+NSString * const MMPopupViewWillDisappearNotification = @"MMPopupViewWillDisappearNotification";
 
 @implementation MMPopupView
 
@@ -154,6 +155,8 @@ static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNot
     {
         [self hideKeyboard];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:MMPopupViewWillDisappearNotification object:self];
     
     MMPopupBlock hideAnimation = self.hideAnimation;
     

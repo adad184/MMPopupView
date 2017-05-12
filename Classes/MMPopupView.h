@@ -12,6 +12,9 @@
 #import "MMPopupCategory.h"
 #import "MMPopupDefine.h"
 
+//hide notification
+UIKIT_EXTERN NSString *const MMPopupViewWillDisappearNotification;
+
 typedef NS_ENUM(NSUInteger, MMPopupType) {
     MMPopupTypeAlert,
     MMPopupTypeSheet,
