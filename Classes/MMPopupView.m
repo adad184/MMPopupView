@@ -266,7 +266,6 @@ static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNot
                              {
                                  self.showCompletionBlock(self, finished);
                              }
-                             
                          }];
     };
     
@@ -318,10 +317,10 @@ static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNot
         if ( !self.superview )
         {
             [self.attachedView.mm_dimBackgroundView addSubview:self];
-            [self mas_updateConstraints:^(MASConstraintMaker *make) {
+            [self mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.center.equalTo(self.attachedView).centerOffset(CGPointMake(0, -self.attachedView.bounds.size.height));
             }];
-            [self layoutIfNeeded];
+            [self.superview layoutIfNeeded];
         }
         
         [UIView animateWithDuration:self.animationDuration
