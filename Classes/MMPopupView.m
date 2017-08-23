@@ -241,13 +241,13 @@ static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNot
         {
             [self.attachedView.mm_dimBackgroundView addSubview:self];
             
-            [self mas_updateConstraints:^(MASConstraintMaker *make) {
+            [self mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(self.attachedView);
                 make.bottom.equalTo(self.attachedView.mas_bottom).offset(self.attachedView.frame.size.height);
             }];
-            [self layoutIfNeeded];
+            [self.superview layoutIfNeeded];
         }
-        
+
         [UIView animateWithDuration:self.animationDuration
                               delay:0
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
@@ -256,7 +256,7 @@ static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNot
                              [self mas_updateConstraints:^(MASConstraintMaker *make) {
                                  make.bottom.equalTo(self.attachedView.mas_bottom).offset(0);
                              }];
-                             
+                
                              [self.superview layoutIfNeeded];
                              
                          }
