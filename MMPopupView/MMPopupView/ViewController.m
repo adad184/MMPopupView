@@ -15,7 +15,6 @@
 #import "MMDateView.h"
 #import "MMPopupWindow.h"
 
-#import "MMAddressView.h"
 
 @interface ViewController ()
 
@@ -48,7 +47,7 @@
     self.btnAddress = [UIButton buttonWithType:UIButtonTypeCustom];
 
     NSArray *arrayButton = @[self.btnAlert, self.btnConfirm, self.btnInput, self.btnSheet, self.btnPin, self.btnDate, self.btnAddress];
-    NSArray *arrayTitle  = @[@"Alert - Default", @"Alert - Confirm", @"Alert - Input", @"Sheet - Default", @"Custom - PinView", @"Custom - DateView", @"Custom - LocalView"];
+    NSArray *arrayTitle  = @[@"Alert - Default", @"Alert - Confirm", @"Alert - Input", @"Sheet - Default", @"Custom - PinView", @"Custom - DateView"];
     
     for ( int i = 0 ; i < arrayButton.count; ++i )
     {
@@ -144,29 +143,6 @@
             MMDateView *dateView = [MMDateView new];
             
             [dateView showWithBlock:completeBlock];
-            
-            break;
-        }
-        case 6:
-        {
-            MMAddressView *addressView = [[MMAddressView alloc] init];
-            
-            addressView.selectedAddress = ^(MMAddress *address) {
-                NSLog(@"%@-%@-%@", address.aProvince, address.aCity, address.aDistrict);
-            };
-            
-            [addressView show];
-            
-//            MMAddress *customAddress = [[MMAddress alloc] initWithProvince:@"浙江省"
-//                                                                      city:@"杭州市"
-//                                                                  district:@"西湖区"];
-//            MMAddressView *customAddressView = [[MMAddressView alloc] initWithAddress:customAddress];
-//            
-//            customAddressView.selectedAddress = ^(MMAddress *address) {
-//                NSLog(@"%@-%@-%@", address.aProvince, address.aCity, address.aDistrict);
-//            };
-//            
-//            [customAddressView show];
             
             break;
         }
