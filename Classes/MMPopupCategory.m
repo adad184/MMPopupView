@@ -326,6 +326,7 @@ static const void *mm_dimBackgroundBlurEffectStyleKey = &mm_dimBackgroundBlurEff
                          if ( finished )
                          {
                              self.mm_dimBackgroundAnimating = NO;
+                             self.mm_dimBackgroundBlurEnabled = NO;
                              
                              if ( self == [MMPopupWindow sharedWindow].attachView )
                              {

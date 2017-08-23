@@ -20,6 +20,10 @@ UIGestureRecognizerDelegate
 
 @implementation MMPopupWindow
 
+- (void)dealloc {
+    printf("dealloc");
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

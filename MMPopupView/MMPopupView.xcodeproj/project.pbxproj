@@ -10,7 +10,6 @@
 		C3A6D7C7352C468FC6AFBD15 /* libPods-MMPopupView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4EBFF7F54A0C418E7302440 /* libPods-MMPopupView.a */; };
 		ED1E99341B9BD5C20093760A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99331B9BD5C20093760A /* main.m */; };
 		ED1E99371B9BD5C20093760A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99361B9BD5C20093760A /* AppDelegate.m */; };
-		ED1E993A1B9BD5C20093760A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E99391B9BD5C20093760A /* ViewController.m */; };
 		ED1E993D1B9BD5C20093760A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1E993B1B9BD5C20093760A /* Main.storyboard */; };
 		ED1E993F1B9BD5C20093760A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1E993E1B9BD5C20093760A /* Assets.xcassets */; };
 		ED1E99421B9BD5C20093760A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED1E99401B9BD5C20093760A /* LaunchScreen.storyboard */; };
@@ -22,6 +21,7 @@
 		ED1E995C1B9BEE8F0093760A /* MMSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E995B1B9BEE8F0093760A /* MMSheetView.m */; };
 		ED1E995F1B9C22F50093760A /* MMPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E995E1B9C22F50093760A /* MMPinView.m */; };
 		EDB365121B9D3323003A0B05 /* MMDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB365111B9D3323003A0B05 /* MMDateView.m */; };
+		F727A5501F4DD578009CB7FF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3EB201BDF7155009D7AEA /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +31,6 @@
 		ED1E99331B9BD5C20093760A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED1E99351B9BD5C20093760A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ED1E99361B9BD5C20093760A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ED1E99381B9BD5C20093760A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		ED1E99391B9BD5C20093760A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		ED1E993C1B9BD5C20093760A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED1E993E1B9BD5C20093760A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED1E99411B9BD5C20093760A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +52,8 @@
 		ED1E995E1B9C22F50093760A /* MMPinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMPinView.m; path = ../MMPinView.m; sourceTree = "<group>"; };
 		EDB365101B9D3323003A0B05 /* MMDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDateView.h; sourceTree = SOURCE_ROOT; };
 		EDB365111B9D3323003A0B05 /* MMDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDateView.m; sourceTree = SOURCE_ROOT; };
+		FEE3EB1F1BDF7155009D7AEA /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FEE3EB201BDF7155009D7AEA /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FF8DF09A03ED96B87C4FB5EA /* Pods-MMPopupView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMPopupView.release.xcconfig"; path = "Pods/Target Support Files/Pods-MMPopupView/Pods-MMPopupView.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,8 +110,8 @@
 			children = (
 				ED1E99351B9BD5C20093760A /* AppDelegate.h */,
 				ED1E99361B9BD5C20093760A /* AppDelegate.m */,
-				ED1E99381B9BD5C20093760A /* ViewController.h */,
-				ED1E99391B9BD5C20093760A /* ViewController.m */,
+				FEE3EB1F1BDF7155009D7AEA /* ViewController.h */,
+				FEE3EB201BDF7155009D7AEA /* ViewController.m */,
 				ED1E995D1B9C22F50093760A /* MMPinView.h */,
 				ED1E995E1B9C22F50093760A /* MMPinView.m */,
 				EDB365101B9D3323003A0B05 /* MMDateView.h */,
@@ -181,11 +181,12 @@
 		ED1E99271B9BD5C20093760A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = LJC;
 				TargetAttributes = {
 					ED1E992E1B9BD5C20093760A = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = J7XJK67HUB;
 					};
 				};
 			};
@@ -258,8 +259,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F727A5501F4DD578009CB7FF /* ViewController.m in Sources */,
 				ED1E99551B9BDE4B0093760A /* MMPopupCategory.m in Sources */,
-				ED1E993A1B9BD5C20093760A /* ViewController.m in Sources */,
 				ED1E995F1B9C22F50093760A /* MMPinView.m in Sources */,
 				ED1E994C1B9BD8520093760A /* MMPopupView.m in Sources */,
 				ED1E99521B9BDAFA0093760A /* MMPopupitem.m in Sources */,
@@ -307,8 +308,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -351,8 +354,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
