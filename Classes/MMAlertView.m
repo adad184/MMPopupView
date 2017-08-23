@@ -209,7 +209,7 @@
             [btn setTitleColor:item.highlight?config.itemHighlightColor:config.itemNormalColor forState:UIControlStateNormal];
             btn.layer.borderWidth = MM_SPLIT_WIDTH;
             btn.layer.borderColor = config.splitColor.CGColor;
-            btn.titleLabel.font = (btn==items.lastObject)?[UIFont boldSystemFontOfSize:config.buttonFontSize]:[UIFont systemFontOfSize:config.buttonFontSize];
+            btn.titleLabel.font = (item==items.lastObject)?[UIFont boldSystemFontOfSize:config.buttonFontSize]:[UIFont systemFontOfSize:config.buttonFontSize];
         }
         [lastButton mas_updateConstraints:^(MASConstraintMaker *make) {
             

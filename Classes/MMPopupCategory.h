@@ -14,6 +14,7 @@
 
 @end
 
+
 @interface UIImage (MMPopup)
 
 + (UIImage *) mm_imageWithColor:(UIColor *)color;
@@ -24,11 +25,13 @@
 
 @end
 
+
 @interface UIButton (MMPopup)
 
 + (id) mm_buttonWithTarget:(id)target action:(SEL)sel;
 
 @end
+
 
 @interface NSString (MMPopup)
 
@@ -36,11 +39,16 @@
 
 @end
 
+
 @interface UIView (MMPopup)
 
-@property (nonatomic, strong, readonly) UIView         *mm_dimBackgroundView;
-@property (nonatomic, assign, readonly) BOOL           mm_dimBackgroundAnimating;
-@property (nonatomic, assign          ) NSTimeInterval mm_dimAnimationDuration;
+@property (nonatomic, strong, readonly ) UIView            *mm_dimBackgroundView;
+@property (nonatomic, assign, readonly ) BOOL              mm_dimBackgroundAnimating;
+@property (nonatomic, assign           ) NSTimeInterval    mm_dimAnimationDuration;
+
+@property (nonatomic, strong, readonly ) UIView            *mm_dimBackgroundBlurView;
+@property (nonatomic, assign           ) BOOL              mm_dimBackgroundBlurEnabled;
+@property (nonatomic, assign           ) UIBlurEffectStyle mm_dimBackgroundBlurEffectStyle;
 
 - (void) mm_showDimBackground;
 - (void) mm_hideDimBackground;

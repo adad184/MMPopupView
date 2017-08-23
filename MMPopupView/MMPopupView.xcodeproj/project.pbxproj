@@ -21,7 +21,7 @@
 		ED1E995C1B9BEE8F0093760A /* MMSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E995B1B9BEE8F0093760A /* MMSheetView.m */; };
 		ED1E995F1B9C22F50093760A /* MMPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1E995E1B9C22F50093760A /* MMPinView.m */; };
 		EDB365121B9D3323003A0B05 /* MMDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB365111B9D3323003A0B05 /* MMDateView.m */; };
-		FEE3EB211BDF7155009D7AEA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3EB201BDF7155009D7AEA /* ViewController.m */; };
+		F727A5501F4DD578009CB7FF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3EB201BDF7155009D7AEA /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -181,7 +181,7 @@
 		ED1E99271B9BD5C20093760A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = LJC;
 				TargetAttributes = {
 					ED1E992E1B9BD5C20093760A = {
@@ -259,11 +259,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F727A5501F4DD578009CB7FF /* ViewController.m in Sources */,
 				ED1E99551B9BDE4B0093760A /* MMPopupCategory.m in Sources */,
 				ED1E995F1B9C22F50093760A /* MMPinView.m in Sources */,
 				ED1E994C1B9BD8520093760A /* MMPopupView.m in Sources */,
 				ED1E99521B9BDAFA0093760A /* MMPopupitem.m in Sources */,
-				FEE3EB211BDF7155009D7AEA /* ViewController.m in Sources */,
 				ED1E994F1B9BDAB80093760A /* MMPopupWindow.m in Sources */,
 				ED1E99591B9BEE7D0093760A /* MMAlertView.m in Sources */,
 				EDB365121B9D3323003A0B05 /* MMDateView.m in Sources */,
@@ -308,8 +308,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -352,8 +354,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -383,12 +387,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = J7XJK67HUB;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MMPopupView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adad184.MMPopupView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -398,12 +403,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = J7XJK67HUB;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MMPopupView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adad184.MMPopupView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

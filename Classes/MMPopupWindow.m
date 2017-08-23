@@ -12,8 +12,9 @@
 #import "MMPopupView.h"
 
 @interface MMPopupWindow()
-
-@property (nonatomic, assign) CGRect keyboardRect;
+<
+UIGestureRecognizerDelegate
+>
 
 @end
 
@@ -27,9 +28,9 @@
     {
         self.windowLevel = UIWindowLevelStatusBar + 1;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyKeyboardChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-        
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTap:)];
+        gesture.cancelsTouchesInView = NO;
+        gesture.delegate = self;
         [self addGestureRecognizer:gesture];
     }
     return self;
@@ -41,9 +42,8 @@
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        
         window = [[MMPopupWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        
+        window.rootViewController = [UIViewController new];
     });
     
     return window;
@@ -52,9 +52,9 @@
 - (void)cacheWindow
 {
     [self makeKeyAndVisible];
-    [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
+    [[[UIApplication sharedApplication].delegate window] makeKeyAndVisible];
     
-    self.mm_dimBackgroundView.hidden = YES;
+    [self attachView].mm_dimBackgroundView.hidden = YES;
     self.hidden = YES;
 }
 
@@ -62,7 +62,7 @@
 {
     if ( self.touchWildToHide && !self.mm_dimBackgroundAnimating )
     {
-        for ( UIView *v in self.mm_dimBackgroundView.subviews )
+        for ( UIView *v in [self attachView].mm_dimBackgroundView.subviews )
         {
             if ( [v isKindOfClass:[MMPopupView class]] )
             {
@@ -73,10 +73,14 @@
     }
 }
 
-- (void)notifyKeyboardChangeFrame:(NSNotification *)n
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    NSValue *keyboardBoundsValue = [[n userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey];
-    self.keyboardRect = [keyboardBoundsValue CGRectValue];
+    return ( touch.view == self.attachView.mm_dimBackgroundView );
+}
+
+- (UIView *)attachView
+{
+    return self.rootViewController.view;
 }
 
 @end

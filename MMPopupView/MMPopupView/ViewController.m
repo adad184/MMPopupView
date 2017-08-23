@@ -17,6 +17,10 @@
 
 
 @interface ViewController ()
+<
+UITableViewDelegate,
+UITableViewDataSource
+>
 
 @property (nonatomic, strong) UIButton *btnAlert;
 @property (nonatomic, strong) UIButton *btnConfirm;
@@ -25,7 +29,7 @@
 @property (nonatomic, strong) UIButton *btnPin;
 @property (nonatomic, strong) UIButton *btnDate;
 
-@property (nonatomic, strong) UIButton *btnAddress;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -35,38 +39,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.btnAlert   = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btnConfirm = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btnInput   = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btnSheet   = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btnPin     = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btnDate    = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btnAddress = [UIButton buttonWithType:UIButtonTypeCustom];
-
-    NSArray *arrayButton = @[self.btnAlert, self.btnConfirm, self.btnInput, self.btnSheet, self.btnPin, self.btnDate, self.btnAddress];
-    NSArray *arrayTitle  = @[@"Alert - Default", @"Alert - Confirm", @"Alert - Input", @"Sheet - Default", @"Custom - PinView", @"Custom - DateView"];
+    self.tableView = [UITableView new];
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
-    for ( int i = 0 ; i < arrayButton.count; ++i )
-    {
-        UIButton *btn = arrayButton[i];
-        [self.view addSubview:btn];
-        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.view);
-            make.top.equalTo(self.view.mas_top).offset(100 + i*60);
-            make.size.mas_equalTo(CGSizeMake(180, 40));
-        }];
-        
-        [btn setTitle:arrayTitle[i] forState:UIControlStateNormal];
-        [btn setBackgroundColor:[UIColor blackColor]];
-        [btn addTarget:self action:@selector(actionButton:) forControlEvents:UIControlEventTouchUpInside];
-        btn.titleLabel.textAlignment = NSTextAlignmentLeft;
-        btn.tag = i;
-    }
-    
-    [[MMPopupWindow sharedWindow] cacheWindow];
+//    [[MMPopupWindow sharedWindow] cacheWindow];
     [MMPopupWindow sharedWindow].touchWildToHide = YES;
     
     MMAlertViewConfig *alertConfig = [MMAlertViewConfig globalConfig];
@@ -77,19 +62,49 @@
     alertConfig.defaultTextConfirm = @"Confirm";
     
     sheetConfig.defaultTextCancel = @"Cancel";
+    
+    
 }
 
-- (void)actionButton:(UIButton*)btn
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    cell.textLabel.text = @[@"Alert - Default", @"Alert - Confirm", @"Alert - Input", @"Sheet - Default", @"Custom - PinView", @"Custom - DateView"][indexPath.row];
+    cell.textLabel.textColor = [UIColor redColor];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"didSelect");
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self action:indexPath.row];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 6;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (void)action:(NSUInteger)index;
 {
     MMPopupItemHandler block = ^(NSInteger index){
         NSLog(@"clickd %@ button",@(index));
     };
     
-    MMPopupBlock completeBlock = ^(MMPopupView *popupView){
+    MMPopupCompletionBlock completeBlock = ^(MMPopupView *popupView, BOOL finished){
         NSLog(@"animation complete");
     };
     
-    switch ( btn.tag) {
+    switch ( index ) {
         case 0:
         {
             NSArray *items =
@@ -101,7 +116,9 @@
             MMAlertView *alertView = [[MMAlertView alloc] initWithTitle:@"AlertView"
                                          detail:@"each button take one row if there are more than 2 items"
                                           items:items];
-            alertView.attachedView = self.view;
+//            alertView.attachedView = self.view;
+            alertView.attachedView.mm_dimBackgroundBlurEnabled = YES;
+            alertView.attachedView.mm_dimBackgroundBlurEffectStyle = UIBlurEffectStyleLight;
             
             [alertView show];
             
@@ -109,14 +126,23 @@
         }
         case 1:
         {
-            [[[MMAlertView alloc] initWithConfirmTitle:@"AlertView" detail:@"Confirm Dialog"] showWithBlock:completeBlock];
+            MMAlertView *alertView = [[MMAlertView alloc] initWithConfirmTitle:@"AlertView" detail:@"Confirm Dialog"];
+            alertView.attachedView = self.view;
+            alertView.attachedView.mm_dimBackgroundBlurEnabled = YES;
+            alertView.attachedView.mm_dimBackgroundBlurEffectStyle = UIBlurEffectStyleDark;
+            [alertView showWithBlock:completeBlock];
             break;
         }
         case 2:
         {
-            [[[MMAlertView alloc] initWithInputTitle:@"AlertView" detail:@"Input Dialog" placeholder:@"Your placeholder" handler:^(NSString *text) {
+            MMAlertView *alertView = [[MMAlertView alloc] initWithInputTitle:@"AlertView" detail:@"Input Dialog" placeholder:@"Your placeholder" handler:^(NSString *text) {
                 NSLog(@"input:%@",text);
-            }] showWithBlock:completeBlock];
+            }];
+            alertView.attachedView = self.view;
+            alertView.attachedView.mm_dimBackgroundBlurEnabled = YES;
+            alertView.attachedView.mm_dimBackgroundBlurEffectStyle = UIBlurEffectStyleExtraLight;
+            [alertView showWithBlock:completeBlock];
+            
             break;
         }
         case 3:
@@ -126,8 +152,11 @@
               MMItemMake(@"Highlight", MMItemTypeHighlight, block),
               MMItemMake(@"Disabled", MMItemTypeDisabled, block)];
             
-            [[[MMSheetView alloc] initWithTitle:@"SheetView"
-                                          items:items] showWithBlock:completeBlock];
+            MMSheetView *sheetView = [[MMSheetView alloc] initWithTitle:@"SheetView"
+                                                                  items:items];
+            sheetView.attachedView = self.view;
+            sheetView.attachedView.mm_dimBackgroundBlurEnabled = NO;
+            [sheetView showWithBlock:completeBlock];
             break;
         }
         case 4:
@@ -143,6 +172,10 @@
             MMDateView *dateView = [MMDateView new];
             
             [dateView showWithBlock:completeBlock];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MMDateView hideAll];
+            });
             
             break;
         }

@@ -8,6 +8,7 @@
 
 #import "MMPopupCategory.h"
 #import "MMPopupDefine.h"
+#import "MMPopupWindow.h"
 #import <Masonry/Masonry.h>
 #import <objc/runtime.h>
 
@@ -93,11 +94,15 @@
 @end
 
 
-static const void *mm_dimReferenceCountKey      = &mm_dimReferenceCountKey;
+static const void *mm_dimReferenceCountKey            = &mm_dimReferenceCountKey;
 
-static const void *mm_dimBackgroundViewKey      = &mm_dimBackgroundViewKey;
-static const void *mm_dimAnimationDurationKey   = &mm_dimAnimationDurationKey;
-static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
+static const void *mm_dimBackgroundViewKey            = &mm_dimBackgroundViewKey;
+static const void *mm_dimAnimationDurationKey         = &mm_dimAnimationDurationKey;
+static const void *mm_dimBackgroundAnimatingKey       = &mm_dimBackgroundAnimatingKey;
+
+static const void *mm_dimBackgroundBlurViewKey        = &mm_dimBackgroundBlurViewKey;
+static const void *mm_dimBackgroundBlurEnabledKey     = &mm_dimBackgroundBlurEnabledKey;
+static const void *mm_dimBackgroundBlurEffectStyleKey = &mm_dimBackgroundBlurEffectStyleKey;
 
 @interface UIView (MMPopupInner)
 
@@ -121,13 +126,15 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
 
 @end
 
-
 @implementation UIView (MMPopup)
 
 @dynamic mm_dimBackgroundView;
 @dynamic mm_dimAnimationDuration;
 @dynamic mm_dimBackgroundAnimating;
+@dynamic mm_dimBackgroundBlurView;
 
+
+//mm_dimBackgroundView
 - (UIView *)mm_dimBackgroundView
 {
     UIView *dimView = objc_getAssociatedObject(self, mm_dimBackgroundViewKey);
@@ -139,7 +146,9 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
         [dimView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
         }];
-        dimView.hidden = YES;
+        dimView.alpha = 0.0f;
+        dimView.backgroundColor = MMHexColor(0x0000007F);
+        dimView.layer.zPosition = FLT_MAX;
         
         self.mm_dimAnimationDuration = 0.3f;
         
@@ -149,6 +158,87 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
     return dimView;
 }
 
+//mm_dimBackgroundBlurEnabled
+- (BOOL)mm_dimBackgroundBlurEnabled
+{
+    return [objc_getAssociatedObject(self, mm_dimBackgroundBlurEnabledKey) boolValue];
+}
+
+- (void)setMm_dimBackgroundBlurEnabled:(BOOL)mm_dimBackgroundBlurEnabled
+{
+    objc_setAssociatedObject(self, mm_dimBackgroundBlurEnabledKey, @(mm_dimBackgroundBlurEnabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    if ( mm_dimBackgroundBlurEnabled )
+    {
+        self.mm_dimBackgroundView.backgroundColor = MMHexColor(0x00000000);
+        self.mm_dimBackgroundBlurEffectStyle = self.mm_dimBackgroundBlurEffectStyle;
+        self.mm_dimBackgroundBlurView.hidden = NO;
+    }
+    else
+    {
+        self.mm_dimBackgroundView.backgroundColor = MMHexColor(0x0000007F);
+        self.mm_dimBackgroundBlurView.hidden = YES;
+    }
+}
+
+//mm_dimBackgroundBlurEffectStyle
+- (UIBlurEffectStyle)mm_dimBackgroundBlurEffectStyle
+{
+    return [objc_getAssociatedObject(self, mm_dimBackgroundBlurEffectStyleKey) integerValue];
+}
+
+- (void)setMm_dimBackgroundBlurEffectStyle:(UIBlurEffectStyle)mm_dimBackgroundBlurEffectStyle
+{
+    objc_setAssociatedObject(self, mm_dimBackgroundBlurEffectStyleKey, @(mm_dimBackgroundBlurEffectStyle), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    if ( self.mm_dimBackgroundBlurEnabled )
+    {
+        [self.mm_dimBackgroundBlurView removeFromSuperview];
+        self.mm_dimBackgroundBlurView = nil;
+        
+        UIView *blurView = [self mm_dimBackgroundBlurView];
+        [self.mm_dimBackgroundView addSubview:blurView];
+        [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.mm_dimBackgroundView);
+        }];
+    }
+}
+
+//mm_dimBackgroundBlurView
+- (UIView *)mm_dimBackgroundBlurView
+{
+    UIView *blurView = objc_getAssociatedObject(self, mm_dimBackgroundBlurViewKey);
+    
+    if ( !blurView )
+    {
+        blurView = [UIView new];
+        
+        if ( [UIVisualEffectView class] )
+        {
+            UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:self.mm_dimBackgroundBlurEffectStyle]];
+            [blurView addSubview:effectView];
+            [effectView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(blurView);
+            }];
+        }
+        else
+        {
+            blurView.backgroundColor = @[MMHexColor(0x000007F),MMHexColor(0xFFFFFF7F),MMHexColor(0xFFFFFF7F)][self.mm_dimBackgroundBlurEffectStyle];
+        }
+        blurView.userInteractionEnabled = NO;
+        
+        objc_setAssociatedObject(self, mm_dimBackgroundBlurViewKey, blurView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    
+    return blurView;
+}
+
+- (void)setMm_dimBackgroundBlurView:(UIView *)mm_dimBackgroundBlurView
+{
+    objc_setAssociatedObject(self, mm_dimBackgroundBlurViewKey, mm_dimBackgroundBlurView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+//mm_dimBackgroundAnimating
 - (BOOL)mm_dimBackgroundAnimating
 {
     return [objc_getAssociatedObject(self, mm_dimBackgroundAnimatingKey) boolValue];
@@ -159,6 +249,7 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
     objc_setAssociatedObject(self, mm_dimBackgroundAnimatingKey, @(mm_dimBackgroundAnimating), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+//mm_dimAnimationDuration
 - (NSTimeInterval)mm_dimAnimationDuration
 {
     return [objc_getAssociatedObject(self, mm_dimAnimationDurationKey) doubleValue];
@@ -181,7 +272,12 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
     self.mm_dimBackgroundView.hidden = NO;
     self.mm_dimBackgroundAnimating = YES;
     
-    if ( [self isKindOfClass:[UIWindow class]] )
+    if ( self == [MMPopupWindow sharedWindow].attachView )
+    {
+        [MMPopupWindow sharedWindow].hidden = NO;
+        [[MMPopupWindow sharedWindow] makeKeyAndVisible];
+    }
+    else if ( [self isKindOfClass:[UIWindow class]] )
     {
         self.hidden = NO;
         [(UIWindow*)self makeKeyAndVisible];
@@ -193,10 +289,10 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
     
     [UIView animateWithDuration:self.mm_dimAnimationDuration
                           delay:0
-                        options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
+                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          
-                         self.mm_dimBackgroundView.backgroundColor = MMHexColor(0x0000007F);
+                         self.mm_dimBackgroundView.alpha = 1.0f;
                          
                      } completion:^(BOOL finished) {
                          
@@ -220,19 +316,23 @@ static const void *mm_dimBackgroundAnimatingKey = &mm_dimBackgroundAnimatingKey;
     self.mm_dimBackgroundAnimating = YES;
     [UIView animateWithDuration:self.mm_dimAnimationDuration
                           delay:0
-                        options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState
+                        options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          
-                         self.mm_dimBackgroundView.backgroundColor = MMHexColor(0x00000000);
+                         self.mm_dimBackgroundView.alpha = 0.0f;
                          
                      } completion:^(BOOL finished) {
                          
                          if ( finished )
                          {
-                             self.mm_dimBackgroundView.hidden = YES;
                              self.mm_dimBackgroundAnimating = NO;
                              
-                             if ( [self isKindOfClass:[UIWindow class]] )
+                             if ( self == [MMPopupWindow sharedWindow].attachView )
+                             {
+                                 [MMPopupWindow sharedWindow].hidden = YES;
+                                 [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
+                             }
+                             else if ( self == [MMPopupWindow sharedWindow] )
                              {
                                  self.hidden = YES;
                                  [[[UIApplication sharedApplication].delegate window] makeKeyWindow];

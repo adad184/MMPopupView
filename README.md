@@ -6,7 +6,7 @@ MMPopupView
 
 [中文介绍](http://adad184.com/2015/09/08/opensource-mmpopupview/)
 
-A basic Pop-Up Kit allows you to easily create Pop-Up view. You can focus on the only view you want to show. 
+A basic Pop-Up Kit allows you to easily create Pop-Up view. You can focus on the only view you want to show.
 
 Besides, it comes with 2 common Pop-Up view, **MMAlertView** &  **MMSheetView**. You can easily use & customize it.
 
@@ -47,7 +47,7 @@ NSArray *items =
                              detail:@"each button take one row if there are more than 2 items"
                               items:items]
  showWithBlock:completeBlock];
-             
+
 //MMSheetView
 NSArray *items =
 @[MMItemMake(@"Normal", MMItemTypeNormal, block),
@@ -61,7 +61,7 @@ NSArray *items =
 MMPopupView
 ===============
 
-MMPopupView is a basic Pop-Up view designed to be subclassed. 
+MMPopupView is a basic Pop-Up view designed to be subclassed.
 It provide 3 kind of animations(alert, sheet, drop), or you can provide your own animation by override the **showAnimation** and **hideAnimation**.
 
 ```objc
@@ -74,6 +74,7 @@ typedef NS_ENUM(NSUInteger, MMPopupType) {
 @class MMPopupView;
 
 typedef void(^MMPopupBlock)(MMPopupView *);
+typedef void(^MMPopupCompletionBlock)(MMPopupView *, BOOL);
 
 @interface MMPopupView : UIView
 
@@ -85,8 +86,8 @@ typedef void(^MMPopupBlock)(MMPopupView *);
 @property (nonatomic, assign          ) NSTimeInterval animationDuration;   // default is 0.3 sec.
 @property (nonatomic, assign          ) BOOL           withKeyboard;        // default is NO. When YES, alert view with be shown with a center offset (only effect with MMPopupTypeAlert).
 
-@property (nonatomic, copy            ) MMPopupBlock   showCompletionBlock; // show completion block.
-@property (nonatomic, copy            ) MMPopupBlock   hideCompletionBlock; // hide completion block
+@property (nonatomic, copy            ) MMPopupCompletionBlock   showCompletionBlock; // show completion block.
+@property (nonatomic, copy            ) MMPopupCompletionBlock   hideCompletionBlock; // hide completion block
 
 @property (nonatomic, copy            ) MMPopupBlock   showAnimation;       // custom show animation block.
 @property (nonatomic, copy            ) MMPopupBlock   hideAnimation;       // custom hide animation block.
@@ -127,6 +128,11 @@ typedef void(^MMPopupBlock)(MMPopupView *);
 - (void) hideWithBlock:(MMPopupBlock)block;
 
 @end
+
+/**
+ *  hide all popupview with current class, eg. [MMAlertview hideAll];
+ */
++ (void) hideAll;
 ```
 
 If you want to create your own Pop-Up view,simply you only need to subclass from **MMPopupView**.
@@ -154,7 +160,7 @@ after you customize it, you can simply use it.
 
 MMAlertView
 ===============
-**MMAlertView** is based on **MMPopupView**. 
+**MMAlertView** is based on **MMPopupView**.
 
 ```objc
 typedef void(^MMPopupInputHandler)(NSString *text);
@@ -211,7 +217,7 @@ typedef void(^MMPopupInputHandler)(NSString *text);
 
 MMSheetView
 ===============
-**MMSheetView** is based on **MMPopupView**. 
+**MMSheetView** is based on **MMPopupView**.
 
 
 ```objc
@@ -249,14 +255,42 @@ MMSheetView
 
 @end
 ```
-	
+
 
 Changelog
 ===============
+v1.7.1  Fix black screen problem when attachView is the main keyWindow.
+v1.7    Add blur effect.
 
-v1.3  Bug fixed
+```objc
+@interface UIView (MMPopup)
+@property (nonatomic, strong, readonly ) UIView            *mm_dimBackgroundBlurView;
+@property (nonatomic, assign           ) BOOL              mm_dimBackgroundBlurEnabled;
+@property (nonatomic, assign           ) UIBlurEffectStyle mm_dimBackgroundBlurEffectStyle;
+@end
+```
+e.g.
+```objc
+alertView.attachedView = self.view;
+alertView.attachedView.mm_dimBackgroundBlurEnabled = YES;
+alertView.attachedView.mm_dimBackgroundBlurEffectStyle = UIBlurEffectStyleLight;
+```
 
-v1.2  Now you could know whether MMPopupView is visible by using:
+v1.6    Add '+ hideAll' method, improve code struct.
+
+v1.5.3  Fixed touch problem with `touchWildToHide`
+
+v1.5.2  Fixed touch problem when there are scrollviews in custom view
+
+v1.5.1  Fixed showing problem
+
+v1.5    Fixed rotation problem
+
+v1.4    Adjust animation easing function. Rebuild the demo.(thx to @yoavlt)
+
+v1.3    Bug fixed
+
+v1.2    Now you could know whether MMPopupView is visible by using:
 
 ```
 @property (nonatomic, assign, readonly) BOOL           visible;             // default is NO.
@@ -266,7 +300,7 @@ v1.2  Now you could know whether MMPopupView is visible by using:
 v1.1  Now you can attached MMPopupView to any UIView you want by using:
 
 ```objc
-@property (nonatomic, strong          ) UIView         *attachedView; // default is MMPopupWindow. You can attach MMPopupView to any UIView.         
+@property (nonatomic, strong          ) UIView         *attachedView; // default is MMPopupWindow. You can attach MMPopupView to any UIView.
 ```
 
 v1.0  first version
