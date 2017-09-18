@@ -121,21 +121,29 @@
         
         self.cancelButton = [UIButton mm_buttonWithTarget:self action:@selector(actionCancel)];
         [self addSubview:self.cancelButton];
+        
         [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.buttonView);
             make.height.mas_equalTo(config.buttonHeight);
             make.top.equalTo(self.buttonView.mas_bottom).offset(8);
         }];
+        
         self.cancelButton.titleLabel.font = [UIFont systemFontOfSize:config.buttonFontSize];
         [self.cancelButton setBackgroundImage:[UIImage mm_imageWithColor:config.backgroundColor] forState:UIControlStateNormal];
         [self.cancelButton setBackgroundImage:[UIImage mm_imageWithColor:config.itemPressedColor] forState:UIControlStateHighlighted];
         [self.cancelButton setTitle:config.defaultTextCancel forState:UIControlStateNormal];
         [self.cancelButton setTitleColor:config.itemNormalColor forState:UIControlStateNormal];
-        
+        CGFloat btmOffset = 0;
+        CGSize screenSize = [UIScreen mainScreen].bounds.size;
+        if (screenSize.height == 812){
+            btmOffset = 43;     // iPhoneX Portrait
+        }
+        if ( screenSize.width == 812 ) {
+            btmOffset = 33;     // iPhoneX Landscape
+        }
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.cancelButton.mas_bottom);
+            make.bottom.equalTo(self.cancelButton.mas_bottom).offset(btmOffset);
         }];
-        
     }
     
     return self;
