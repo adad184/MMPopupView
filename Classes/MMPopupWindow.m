@@ -11,6 +11,8 @@
 #import "MMPopupDefine.h"
 #import "MMPopupView.h"
 
+NSString * const MMPopupWindowWildToHideNotification = @"MMPopupWindowWildToHideNotification";
+
 @interface MMPopupWindow()
 <
 UIGestureRecognizerDelegate
@@ -68,6 +70,8 @@ UIGestureRecognizerDelegate
             {
                 MMPopupView *popupView = (MMPopupView*)v;
                 [popupView hide];
+                //发送通知
+                [[NSNotificationCenter defaultCenter] postNotificationName:MMPopupWindowWildToHideNotification object:popupView];
             }
         }
     }
