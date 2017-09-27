@@ -12,7 +12,8 @@
 UIKIT_EXTERN NSString *const MMPopupWindowWildToHideNotification;
 
 @protocol MMPopupWindowWildToHideProtocol <NSObject>
-
+ 
+@optional
 /**
  MMPopupWindowWildToHideHandler
  */
