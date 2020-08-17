@@ -5,8 +5,8 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/macRong/MMPopupView"
   s.license      = { :type => 'MIT License', :file => 'LICENSE' }
   s.author       = { "adad184" => "adad184@gmail.com" }
-  s.source       = { :git => "https://github.com/macRong/MMPopupView.git", :tag => "1.7.2" }
-  s.platform     = :ios, '7.0'
+  s.source       = { :git => "https://github.com/macRong/MMPopupView.git", :tag => "1.7.3" }
+  s.platform     = :ios, '8.0'
   s.source_files = 'Classes/*.{h,m}'
   s.requires_arc = true
   s.dependency 'Masonry'
