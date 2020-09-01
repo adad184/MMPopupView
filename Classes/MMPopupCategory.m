@@ -314,31 +314,19 @@ static const void *mm_dimBackgroundBlurEffectStyleKey = &mm_dimBackgroundBlurEff
     }
     
     self.mm_dimBackgroundAnimating = YES;
-    [UIView animateWithDuration:self.mm_dimAnimationDuration
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-                         
-                         self.mm_dimBackgroundView.alpha = 0.0f;
-                         
-                     } completion:^(BOOL finished) {
-                         
-                         if ( finished )
-                         {
-                             self.mm_dimBackgroundAnimating = NO;
-                             
-                             if ( self == [MMPopupWindow sharedWindow].attachView )
-                             {
-                                 [MMPopupWindow sharedWindow].hidden = YES;
-                                 [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
-                             }
-                             else if ( self == [MMPopupWindow sharedWindow] )
-                             {
-                                 self.hidden = YES;
-                                 [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
-                             }
-                         }
-                     }];
+    self.mm_dimBackgroundView.alpha = 0.0f;
+    self.mm_dimBackgroundAnimating = NO;
+
+    if ( self == [MMPopupWindow sharedWindow].attachView )
+     {
+         [MMPopupWindow sharedWindow].hidden = YES;
+         [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
+     }
+     else if ( self == [MMPopupWindow sharedWindow] )
+     {
+         self.hidden = YES;
+         [[[UIApplication sharedApplication].delegate window] makeKeyWindow];
+     }
 }
 
 - (void) mm_distributeSpacingHorizontallyWith:(NSArray*)views

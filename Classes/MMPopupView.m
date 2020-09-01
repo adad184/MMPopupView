@@ -214,17 +214,17 @@ static NSString * const MMPopupViewHideAllNotification = @"MMPopupViewHideAllNot
                              
                          }
                          completion:^(BOOL finished) {
-                             
-                             if ( finished )
-                             {
-                                 [self removeFromSuperview];
-                             }
-                             
                              if ( self.hideCompletionBlock )
                              {
-                                 self.hideCompletionBlock(self, finished);
-                             }
-                             
+                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                         self.hideCompletionBlock(self, finished);
+                                     });
+                            }
+                               
+                            if (finished)
+                            {
+                                [self removeFromSuperview];
+                            }
                          }];
     };
     
